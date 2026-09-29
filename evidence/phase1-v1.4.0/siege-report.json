@@ -1,0 +1,41 @@
+{
+  "audit": {
+    "attempts": 24,
+    "evidence_root": "e8f9573aa22f8d936fa2e655b1b1a00daced3f766fc568c075239b6146de884c",
+    "failures": 0,
+    "invariant_ok": true,
+    "name": "audit-concurrent-append",
+    "successes": 24
+  },
+  "audit_chain_valid": true,
+  "audit_snapshot": {
+    "count": 25,
+    "head": "a27bb49316161ef6d1dc04ae84b0b9511186e47385e0cb54154d46f129572599",
+    "root": "f1430dcebc1d07fdb2739659ced1e969ffa8317bc5019d893a46405ff56b7b00"
+  },
+  "lease": {
+    "attempts": 32,
+    "evidence_root": "939d37fab5f8f20c0a4a190dcb9926916ee826ab4c538cb02834e2acc33ba08f",
+    "failures": 31,
+    "invariant_ok": true,
+    "name": "lease-contention",
+    "successes": 1
+  },
+  "lease_row": {
+    "attempt": 1,
+    "fencing_token": 1,
+    "lease_owner": "w20",
+    "state": "RUNNING"
+  },
+  "policy_root": "da5bec160827f64ec0b839603cd5cfc2e8df40d7b41e5f95c8add48b062601f9",
+  "postgres_deep_static_pass": true,
+  "report_root": "5b281a3623679e46d021d0a48d1744468f6e184936bea19e32ad092607a81a76",
+  "sqlite_deep_pass": true,
+  "truth_boundary": {
+    "phase1_certificate_issued": false,
+    "phase2_allowed": false,
+    "python_typechecker_executed": false,
+    "real_postgres_executed": false
+  },
+  "version": "1.4.0"
+}

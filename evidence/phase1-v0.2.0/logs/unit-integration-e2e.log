@@ -1,0 +1,24 @@
+test_e2e_control_spine (test_phase1_api.API.test_e2e_control_spine) ... ok
+test_workspace_isolation (test_phase1_api.API.test_workspace_isolation) ... ok
+test_artifact_hash (test_phase1_core.T.test_artifact_hash) ... ok
+test_inbox_dedup (test_phase1_core.T.test_inbox_dedup) ... ok
+test_mission_machine (test_phase1_core.T.test_mission_machine) ... ok
+test_pairing_one_time (test_phase1_core.T.test_pairing_one_time) ... ok
+test_reference_worker_deterministic (test_phase1_core.T.test_reference_worker_deterministic) ... ok
+test_stale_worker_rejected_after_recovery (test_phase1_core.T.test_stale_worker_rejected_after_recovery) ... ok
+test_mobile_to_recovery_artifact_reconnect (test_phase1_e2e.E2E.test_mobile_to_recovery_artifact_reconnect) ... ok
+test_approval_policy (test_phase1_runtime.Runtime.test_approval_policy) ... ok
+test_artifact_evidence_audit (test_phase1_runtime.Runtime.test_artifact_evidence_audit) ... ok
+test_atomic_outbox (test_phase1_runtime.Runtime.test_atomic_outbox) ... ok
+test_health (test_phase1_runtime.Runtime.test_health) ... ok
+test_idempotent_mission_job (test_phase1_runtime.Runtime.test_idempotent_mission_job) ... ok
+test_inbox (test_phase1_runtime.Runtime.test_inbox) ... ok
+test_lease_recovery_fencing (test_phase1_runtime.Runtime.test_lease_recovery_fencing) ... ok
+test_pairing_replay_and_isolation (test_phase1_runtime.Runtime.test_pairing_replay_and_isolation) ... ok
+test_replay (test_phase1_runtime.Runtime.test_replay) ... ok
+test_resume_authoritative_state (test_phase1_runtime.Runtime.test_resume_authoritative_state) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.042s
+
+OK

@@ -1,0 +1,296 @@
+{
+  "blockers": {
+    "DB_MIGRATIONS": "migration static contract PASS, but real PostgreSQL execution unavailable",
+    "PYTHON_TYPECHECK": "mypy/pyright unavailable in current environment"
+  },
+  "environment": {
+    "mypy": {
+      "available": false,
+      "executable": null,
+      "name": "mypy"
+    },
+    "pg_isready": {
+      "available": false,
+      "executable": null,
+      "name": "pg_isready"
+    },
+    "postgres": {
+      "available": false,
+      "executable": null,
+      "name": "postgres"
+    },
+    "psql": {
+      "available": false,
+      "executable": null,
+      "name": "psql"
+    },
+    "pyright": {
+      "available": false,
+      "executable": null,
+      "name": "pyright"
+    },
+    "python": {
+      "available": true,
+      "executable": "/opt/pyvenv/bin/python",
+      "name": "python"
+    }
+  },
+  "evidence": {
+    "APPROVAL_POLICY": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "ef843130de964fe5795915c9643ae1e168e73f8c868f6adf42750f0eddbf1407",
+      "gate": "APPROVAL_POLICY",
+      "status": "PASS"
+    },
+    "ARCHITECTURE_DOCTOR": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "4a8353bb8614a62a27e5878a2d00dbf211ecf16ef8f914e7b328d7d3a46f25db",
+      "gate": "ARCHITECTURE_DOCTOR",
+      "status": "PASS"
+    },
+    "ARTIFACT_HASH": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "0f89b6ea016c90894ad741c374dcf91c7b8f690d90532a6d6c08420ba5665d8c",
+      "gate": "ARTIFACT_HASH",
+      "status": "PASS"
+    },
+    "AUDIT_TRAIL": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "dbd0f515ee1b108a5085201eab91420c5ac7317dda080eb9c65d6b786c87536e",
+      "gate": "AUDIT_TRAIL",
+      "status": "PASS"
+    },
+    "AUTH": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "cc94426683638d3a5812117f9cc48cff4c421b4dc6b601f174e2384d9f64e862",
+      "gate": "AUTH",
+      "status": "PASS"
+    },
+    "BACKEND_BUILD": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "40feb3ff81c25245ddc0f84374daf6c83920a91a5340654d9cdb7a62c8e15f2f",
+      "gate": "BACKEND_BUILD",
+      "status": "PASS"
+    },
+    "CHAT_CREATE": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "05eb7ad54ccdc73319908ae1237cb6f1329b13372f8603c6ef160ac480d8665f",
+      "gate": "CHAT_CREATE",
+      "status": "PASS"
+    },
+    "CHAT_STREAM": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "61257c26afd9bbcc461f49f4b158e3270d460a615b9410021d2b2eb984e0c78c",
+      "gate": "CHAT_STREAM",
+      "status": "PASS"
+    },
+    "CONTRACT_VALIDATION": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "805f4521d26247b0d5557e1b9e56864851df67685aac1ca4b2983a20c5ac9272",
+      "gate": "CONTRACT_VALIDATION",
+      "status": "PASS"
+    },
+    "CRITICAL_SECURITY_TESTS": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "1beb46dcedfdccac3cbeac469a7f6d11f296145f29cb7a796970d1cefc3ac3ca",
+      "gate": "CRITICAL_SECURITY_TESTS",
+      "status": "PASS"
+    },
+    "DB_MIGRATIONS": {
+      "detail": "migration static contract PASS, but real PostgreSQL execution unavailable",
+      "evidence_root": "8a622e30af02251ca4b8591a4f6c4fbbd42bc94ed3c80b3fc4f927e3d0e90312",
+      "gate": "DB_MIGRATIONS",
+      "status": "BLOCKED"
+    },
+    "DEPENDENCY_RULES": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "fbac7f98d658639253f9db50ec3618418364645acafb8d666afa128dbd18ca90",
+      "gate": "DEPENDENCY_RULES",
+      "status": "PASS"
+    },
+    "DEVICE_SESSION": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "bee1995ead23c024c09903e1699d43f2ae82ca43a14d6e48091753b181fd08b2",
+      "gate": "DEVICE_SESSION",
+      "status": "PASS"
+    },
+    "EVENT_REPLAY": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "7b04a8ecfd920e4e6a01a6c7d4ac4f828f4c7c33d93c0b90a5ed9e51ad7d482c",
+      "gate": "EVENT_REPLAY",
+      "status": "PASS"
+    },
+    "FENCING_REJECTS_STALE_WORKER": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "43b3e1e7f0ed1376caf482b171d5fc8214e57259fcd2060843b96eff508efe7c",
+      "gate": "FENCING_REJECTS_STALE_WORKER",
+      "status": "PASS"
+    },
+    "FRONTEND_BUILD": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "967ea321063d677f1674aada10a3c36fe9e1cbab236dc4a94b9b86b267d49edf",
+      "gate": "FRONTEND_BUILD",
+      "status": "PASS"
+    },
+    "INBOX_DEDUP": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "ac02f23a631a4d113b042041bc62d4694ff299e2f7b7b43c42be416c50648052",
+      "gate": "INBOX_DEDUP",
+      "status": "PASS"
+    },
+    "JOB_IDEMPOTENCY": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "a8a770f7a1f8b80bbe1dc0088134e9c2fa6d165491897e8183d59be6e0882cad",
+      "gate": "JOB_IDEMPOTENCY",
+      "status": "PASS"
+    },
+    "LEASE_EXPIRY_RECOVERY": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "795301f4f7291cbd01ef90939308123b28d47a22895042b4540d371e9118190b",
+      "gate": "LEASE_EXPIRY_RECOVERY",
+      "status": "PASS"
+    },
+    "MISSION_CREATE": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "d244c65f99d67329ff086e3a5e599dfd20fc53a8ae25ff7e319916fc4ec7f832",
+      "gate": "MISSION_CREATE",
+      "status": "PASS"
+    },
+    "MISSION_RESUME": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "72c4efbb46b0aa3f5d54d5f3e8ac69b071e4283ce0922b194275638cfbd50b5c",
+      "gate": "MISSION_RESUME",
+      "status": "PASS"
+    },
+    "MISSION_STATE_MACHINE": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "d22a4c20ef97e84858a5c9acef7f29497a83f2f7b9f274353eb1f97dbab58283",
+      "gate": "MISSION_STATE_MACHINE",
+      "status": "PASS"
+    },
+    "MONOREPO_STRUCTURE": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "7ee251cb0fc354be6c60351f568584297200cb35c1bf493627701a94ce7a4973",
+      "gate": "MONOREPO_STRUCTURE",
+      "status": "PASS"
+    },
+    "NO_SECRET_LEAK": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "48613ea672bc1097c83b729f055683ae4b3d97456556be0a79b5e8bae6207c06",
+      "gate": "NO_SECRET_LEAK",
+      "status": "PASS"
+    },
+    "OUTBOX_ATOMICITY": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "99e7d974f19bc2d1af6f0a018c6c6ecde8516cae4576de247f9e3b2fa773b268",
+      "gate": "OUTBOX_ATOMICITY",
+      "status": "PASS"
+    },
+    "PHASE_1_E2E": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "54f98556870f0768e1b2d23922587ba3d134bbae22a411c406850223dd4b46cc",
+      "gate": "PHASE_1_E2E",
+      "status": "PASS"
+    },
+    "PROJECT_CREATE": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "7fc929d01c5514f27f636e4a7758c2ca14202ec27602ec81a0285647c2dd2103",
+      "gate": "PROJECT_CREATE",
+      "status": "PASS"
+    },
+    "PYTHON_TYPECHECK": {
+      "detail": "mypy/pyright unavailable in current environment",
+      "evidence_root": "5c3a737b0fe6fe4586a39be499f4bf47205a2d25dcb1b4f3f910506c1ee4ab36",
+      "gate": "PYTHON_TYPECHECK",
+      "status": "BLOCKED"
+    },
+    "SSE_RECONNECT": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "4b37c06227106a28413b144738a56377c830f434efc3a45e8913a6a574eb511e",
+      "gate": "SSE_RECONNECT",
+      "status": "PASS"
+    },
+    "SYSTEM_HEALTH": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "796516e9b2da14f4b06addf92ed27eb5bab5aab75d88ca2f196a94b301e91f10",
+      "gate": "SYSTEM_HEALTH",
+      "status": "PASS"
+    },
+    "TS_TYPECHECK": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "849065a4229c80b87fc89659e07f08ecb5b82406ac0c82cb594f95fe7a8b2ee4",
+      "gate": "TS_TYPECHECK",
+      "status": "PASS"
+    },
+    "WORKSPACE_CREATE": {
+      "detail": "carried forward from verified v0.2.0 baseline",
+      "evidence_root": "e83055842f99137cb195dc534958d014f9b524868aedaf6973081e057b7d4991",
+      "gate": "WORKSPACE_CREATE",
+      "status": "PASS"
+    }
+  },
+  "gates": {
+    "APPROVAL_POLICY": "PASS",
+    "ARCHITECTURE_DOCTOR": "PASS",
+    "ARTIFACT_HASH": "PASS",
+    "AUDIT_TRAIL": "PASS",
+    "AUTH": "PASS",
+    "BACKEND_BUILD": "PASS",
+    "CHAT_CREATE": "PASS",
+    "CHAT_STREAM": "PASS",
+    "CONTRACT_VALIDATION": "PASS",
+    "CRITICAL_SECURITY_TESTS": "PASS",
+    "DB_MIGRATIONS": "BLOCKED",
+    "DEPENDENCY_RULES": "PASS",
+    "DEVICE_SESSION": "PASS",
+    "EVENT_REPLAY": "PASS",
+    "FENCING_REJECTS_STALE_WORKER": "PASS",
+    "FRONTEND_BUILD": "PASS",
+    "INBOX_DEDUP": "PASS",
+    "JOB_IDEMPOTENCY": "PASS",
+    "LEASE_EXPIRY_RECOVERY": "PASS",
+    "MISSION_CREATE": "PASS",
+    "MISSION_RESUME": "PASS",
+    "MISSION_STATE_MACHINE": "PASS",
+    "MONOREPO_STRUCTURE": "PASS",
+    "NO_SECRET_LEAK": "PASS",
+    "OUTBOX_ATOMICITY": "PASS",
+    "PHASE_1_E2E": "PASS",
+    "PROJECT_CREATE": "PASS",
+    "PYTHON_TYPECHECK": "BLOCKED",
+    "SSE_RECONNECT": "PASS",
+    "SYSTEM_HEALTH": "PASS",
+    "TS_TYPECHECK": "PASS",
+    "WORKSPACE_CREATE": "PASS"
+  },
+  "migration_static_audit": {
+    "begins_transaction": true,
+    "commits_transaction": true,
+    "has_fencing_token": true,
+    "has_jsonb": true,
+    "has_timestamptz": true,
+    "missing_tables": [],
+    "static_pass": true,
+    "tables": [
+      "approvals",
+      "artifacts",
+      "audit_events",
+      "conversations",
+      "device_sessions",
+      "evidence_receipts",
+      "inbox_receipts",
+      "jobs",
+      "messages",
+      "missions",
+      "outbox_events",
+      "projects",
+      "workspaces"
+    ]
+  },
+  "phase": "PHASE_1",
+  "phase_1_certificate_issued": false,
+  "phase_2_allowed": false,
+  "report_root": "9e96fbf71ea7500d057651096264ccd85eb27d278d5a0d0899efce2fe61a985a",
+  "source_root": "a39db10d454597718d7bd235ece51044e2ad9bce04cd3f49c1db8b84a034efb8",
+  "version": "0.3.0"
+}

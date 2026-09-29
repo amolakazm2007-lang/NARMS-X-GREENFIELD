@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+apps/web/dist/
+.env
+.env.*

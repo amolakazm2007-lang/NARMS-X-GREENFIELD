@@ -1,0 +1,1091 @@
+{
+  "blockers": {
+    "DB_MIGRATIONS": "real PostgreSQL execution unavailable or failed",
+    "PYTHON_TYPECHECK": "mypy/pyright unavailable or failed; compileall is not accepted as Python typechecking"
+  },
+  "checks": {
+    "architecture": {
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "scripts/architecture_doctor.py"
+      ],
+      "normalized_output_sha256": "96cdc8e8f46cfb8c16870d1df7c92236ccebaa116aa3e6a13463691b5886e36c",
+      "normalized_output_tail": "{\n  \"status\": \"PASS\",\n  \"violations\": []\n}\n",
+      "returncode": 0
+    },
+    "compileall": {
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "compileall",
+        "-q",
+        "packages",
+        "control-plane",
+        "scripts",
+        "tests"
+      ],
+      "normalized_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "normalized_output_tail": "",
+      "returncode": 0
+    },
+    "contracts": {
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "scripts/validate_contracts.py"
+      ],
+      "normalized_output_sha256": "83cdec7709ba625f2ec6caf53d5e25c6a6ace06df2a1f8da60f47296f54ff642",
+      "normalized_output_tail": "{\n  \"schemas\": 16,\n  \"status\": \"PASS\",\n  \"errors\": []\n}\n",
+      "returncode": 0
+    },
+    "frontend_build": {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "normalized_output_sha256": "4fe41cb72141108a0bc839b79c51a5bb03ca422e429a4398a13dcb380e4159d7",
+      "normalized_output_tail": "\n> build\n> rm -rf dist && tsc -p tsconfig.build.json && node scripts/build.mjs\n\n",
+      "returncode": 0
+    },
+    "pytest": {
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+      "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+      "returncode": 0
+    },
+    "secrets": {
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "scripts/no_secret_leak.py"
+      ],
+      "normalized_output_sha256": "274999e84c4c2b1a73333bdeea34f5e50c635cd324e143dfb01e4eb6e7b106d5",
+      "normalized_output_tail": "{\n  \"status\": \"PASS\",\n  \"matches\": []\n}\n",
+      "returncode": 0
+    },
+    "ts_typecheck": {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "normalized_output_sha256": "396901319daac4a4413b23478852db3c572014f86c71d148273565f0f3332696",
+      "normalized_output_tail": "\n> typecheck\n> tsc -p tsconfig.json\n\n",
+      "returncode": 0
+    }
+  },
+  "evidence": {
+    "APPROVAL_POLICY": {
+      "evidence_root": "708b44d47626795fe785377477bcc63516f45ab1ef5230fc89fc8039dcc4b0f1",
+      "gate": "APPROVAL_POLICY",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "ARCHITECTURE_DOCTOR": {
+      "evidence_root": "d05204c3154ecf3cf77cde8b725fe2b7e3a2bb19c1b6d682b0162ff3d5201aec",
+      "gate": "ARCHITECTURE_DOCTOR",
+      "payload": {
+        "detail": "fresh architecture doctor",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "scripts/architecture_doctor.py"
+          ],
+          "normalized_output_sha256": "96cdc8e8f46cfb8c16870d1df7c92236ccebaa116aa3e6a13463691b5886e36c",
+          "normalized_output_tail": "{\n  \"status\": \"PASS\",\n  \"violations\": []\n}\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "ARTIFACT_HASH": {
+      "evidence_root": "d9f0e2a0a1ac53241da66fb8ce1b1629b4a4f41d65d7d2cf3171e5889fc27644",
+      "gate": "ARTIFACT_HASH",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "AUDIT_TRAIL": {
+      "evidence_root": "6997fd44eb7c30d8afcec13caefb0eb1c6c6a1d4c2445d6e8600728889c78deb",
+      "gate": "AUDIT_TRAIL",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "AUTH": {
+      "evidence_root": "86731486dc6ca943e8065f6fa8c4ed9cd2930571824c12a0ef762b5a72b0cb57",
+      "gate": "AUTH",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "BACKEND_BUILD": {
+      "evidence_root": "e200bc455093ee9b0400a840045ff6116f888658243da778de9c2798845d1571",
+      "gate": "BACKEND_BUILD",
+      "payload": {
+        "detail": "fresh Python compileall build check (not a typecheck)",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "compileall",
+            "-q",
+            "packages",
+            "control-plane",
+            "scripts",
+            "tests"
+          ],
+          "normalized_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "normalized_output_tail": "",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "CHAT_CREATE": {
+      "evidence_root": "7772883b64f6032bf9021993ef5fac6cf1658b7a7993df682c6adc9a1e99608d",
+      "gate": "CHAT_CREATE",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "CHAT_STREAM": {
+      "evidence_root": "5212fde3fbbaebac4e99295472924d5e149961079ea356968db0a805afbec55b",
+      "gate": "CHAT_STREAM",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "CONTRACT_VALIDATION": {
+      "evidence_root": "477a6901841bf32ad1bee478c962967040b1b6fe3a38ba234860fce86d8f9d51",
+      "gate": "CONTRACT_VALIDATION",
+      "payload": {
+        "detail": "fresh JSON-schema validation",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "scripts/validate_contracts.py"
+          ],
+          "normalized_output_sha256": "83cdec7709ba625f2ec6caf53d5e25c6a6ace06df2a1f8da60f47296f54ff642",
+          "normalized_output_tail": "{\n  \"schemas\": 16,\n  \"status\": \"PASS\",\n  \"errors\": []\n}\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "CRITICAL_SECURITY_TESTS": {
+      "evidence_root": "eb540da199c369b350ec370c8db247e6591cc1d5c52154a21ceccd47cce67d8f",
+      "gate": "CRITICAL_SECURITY_TESTS",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "DB_MIGRATIONS": {
+      "evidence_root": "fd3303c7c523b329c463c1204a0ffd303d41181484c8d8c3a974c6ad97d18b92",
+      "gate": "DB_MIGRATIONS",
+      "payload": {
+        "detail": "real PostgreSQL execution unavailable or failed",
+        "receipt": {
+          "dsn_present": false,
+          "postgres": null,
+          "psql": null,
+          "static_audit": {
+            "begins_transaction": true,
+            "commits_transaction": true,
+            "has_fencing_token": true,
+            "has_jsonb": true,
+            "has_timestamptz": true,
+            "missing_columns": {},
+            "missing_constraints": [],
+            "missing_tables": [],
+            "static_pass": true,
+            "tables": [
+              "approvals",
+              "artifacts",
+              "audit_events",
+              "conversations",
+              "device_sessions",
+              "evidence_receipts",
+              "inbox_receipts",
+              "jobs",
+              "messages",
+              "missions",
+              "outbox_events",
+              "outbox_publication_receipts",
+              "pairing_codes",
+              "projects",
+              "workspace_bootstrap",
+              "workspaces"
+            ]
+          }
+        },
+        "status": "BLOCKED"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "DEPENDENCY_RULES": {
+      "evidence_root": "6cdb64f8e58fad6d8343f1b2cc3fdcae12ee397286f0922191e5a738776bd2f6",
+      "gate": "DEPENDENCY_RULES",
+      "payload": {
+        "detail": "fresh architecture doctor",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "scripts/architecture_doctor.py"
+          ],
+          "normalized_output_sha256": "96cdc8e8f46cfb8c16870d1df7c92236ccebaa116aa3e6a13463691b5886e36c",
+          "normalized_output_tail": "{\n  \"status\": \"PASS\",\n  \"violations\": []\n}\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "DEVICE_SESSION": {
+      "evidence_root": "578bef455a4c7c75858dc7652ce991cebe037c4f6a9195c46cb14407daba1583",
+      "gate": "DEVICE_SESSION",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "EVENT_REPLAY": {
+      "evidence_root": "ec1de25a108f4d3350c682f2176632410e705c6b2fcd7a629d173b16daf9a3a8",
+      "gate": "EVENT_REPLAY",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "FENCING_REJECTS_STALE_WORKER": {
+      "evidence_root": "7c78b0d2bad422c8b87ba0a6a87bccc7f93ffb84899f1e0c1641eb8c76f93203",
+      "gate": "FENCING_REJECTS_STALE_WORKER",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "FRONTEND_BUILD": {
+      "evidence_root": "1b12a630238fe3fda193191dc496ecd9097cceb1b04bffa79922f732ca5296d2",
+      "gate": "FRONTEND_BUILD",
+      "payload": {
+        "detail": "fresh frontend build",
+        "receipt": {
+          "command": [
+            "npm",
+            "run",
+            "build"
+          ],
+          "normalized_output_sha256": "4fe41cb72141108a0bc839b79c51a5bb03ca422e429a4398a13dcb380e4159d7",
+          "normalized_output_tail": "\n> build\n> rm -rf dist && tsc -p tsconfig.build.json && node scripts/build.mjs\n\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "INBOX_DEDUP": {
+      "evidence_root": "105a025b53248671d91a071112d64d9dc9b9394cb428a29b727d9e5c46e00943",
+      "gate": "INBOX_DEDUP",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "JOB_IDEMPOTENCY": {
+      "evidence_root": "46e21c541b326e44222360a6f82fabdbb3c772777f58496f9f91e080c1fe1647",
+      "gate": "JOB_IDEMPOTENCY",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "LEASE_EXPIRY_RECOVERY": {
+      "evidence_root": "d5a081c59e688a023e6f3e18563f2a435afbcfda32b69c8550f35b8b069bc215",
+      "gate": "LEASE_EXPIRY_RECOVERY",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "MISSION_CREATE": {
+      "evidence_root": "b9d50d81c12c0d1df80fceeca1bfd3e25927fb14b1a59375129fcc8bff0a5944",
+      "gate": "MISSION_CREATE",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "MISSION_RESUME": {
+      "evidence_root": "7618f69d564b5545d911ce8284111ab9cd42e13d6b72cfd3fd12f5056260a3d7",
+      "gate": "MISSION_RESUME",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "MISSION_STATE_MACHINE": {
+      "evidence_root": "ecf3991016d29fdec37402f9643d6c7a7e44b78d8254c5b577ec63eac3ef2d1e",
+      "gate": "MISSION_STATE_MACHINE",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "MONOREPO_STRUCTURE": {
+      "evidence_root": "724162c1ca7bf4769607899d235a034316b5304bc73df8c33c742d22495e4324",
+      "gate": "MONOREPO_STRUCTURE",
+      "payload": {
+        "detail": "fresh architecture doctor",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "scripts/architecture_doctor.py"
+          ],
+          "normalized_output_sha256": "96cdc8e8f46cfb8c16870d1df7c92236ccebaa116aa3e6a13463691b5886e36c",
+          "normalized_output_tail": "{\n  \"status\": \"PASS\",\n  \"violations\": []\n}\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "NO_SECRET_LEAK": {
+      "evidence_root": "ddee341f5116dc5913c8ab5e855140ae633ab07ce2f7cd8e4f1c4b7fcfd88f66",
+      "gate": "NO_SECRET_LEAK",
+      "payload": {
+        "detail": "fresh repository secret scan",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "scripts/no_secret_leak.py"
+          ],
+          "normalized_output_sha256": "274999e84c4c2b1a73333bdeea34f5e50c635cd324e143dfb01e4eb6e7b106d5",
+          "normalized_output_tail": "{\n  \"status\": \"PASS\",\n  \"matches\": []\n}\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "OUTBOX_ATOMICITY": {
+      "evidence_root": "fbcda33f5b11e246f1932eb3d7e8d92f17b371de5b1b0c40286b5a99ba1e8fcc",
+      "gate": "OUTBOX_ATOMICITY",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "PHASE_1_E2E": {
+      "evidence_root": "4f885957810b40f04e2365f5c04f4f6ccf20ee40025070e0a808a631aa6e421c",
+      "gate": "PHASE_1_E2E",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "PROJECT_CREATE": {
+      "evidence_root": "4bc4cfec50388e15fbe7c3247d8b130ce2b0cb4a0f613f5102303434ff38f5eb",
+      "gate": "PROJECT_CREATE",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "PYTHON_TYPECHECK": {
+      "evidence_root": "2adf16ef5a3409b232105d313b954e71ca28c3cd4914fee2105b6b6daa5fd12e",
+      "gate": "PYTHON_TYPECHECK",
+      "payload": {
+        "detail": "mypy/pyright unavailable or failed; compileall is not accepted as Python typechecking",
+        "receipt": {
+          "mypy": null,
+          "pyright": null
+        },
+        "status": "BLOCKED"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "SSE_RECONNECT": {
+      "evidence_root": "2a97b64499f01d559d8477ee7549220eb6e223e88b373c7924c214e59c53c732",
+      "gate": "SSE_RECONNECT",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "SYSTEM_HEALTH": {
+      "evidence_root": "91dc4b16cb98b109cc4cd5b797808f1b4280dafaf0dceeb076febd528d6ee342",
+      "gate": "SYSTEM_HEALTH",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "TS_TYPECHECK": {
+      "evidence_root": "f82a2c442471b3566c2f4a2bfff4c0cb059df1befb903d0c813f60e0849cc174",
+      "gate": "TS_TYPECHECK",
+      "payload": {
+        "detail": "fresh TypeScript typecheck",
+        "receipt": {
+          "command": [
+            "npm",
+            "run",
+            "typecheck"
+          ],
+          "normalized_output_sha256": "396901319daac4a4413b23478852db3c572014f86c71d148273565f0f3332696",
+          "normalized_output_tail": "\n> typecheck\n> tsc -p tsconfig.json\n\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    },
+    "WORKSPACE_CREATE": {
+      "evidence_root": "64326e083a8bab7eadea61fc8ab001d135b4221f36ae7e460fd4bfbf567a990a",
+      "gate": "WORKSPACE_CREATE",
+      "payload": {
+        "detail": "fresh full Phase-1 regression suite",
+        "receipt": {
+          "command": [
+            "/opt/pyvenv/bin/python",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "normalized_output_sha256": "693eadcec9ec25a5a6289beaaa6e9357f96d29631720f14fa311a199ac7be1a3",
+          "normalized_output_tail": "........................................................................ [ 79%]\n...................                                                      [100%]\n91 passed <duration>\n",
+          "returncode": 0
+        },
+        "status": "PASS"
+      },
+      "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6"
+    }
+  },
+  "gates": {
+    "APPROVAL_POLICY": "PASS",
+    "ARCHITECTURE_DOCTOR": "PASS",
+    "ARTIFACT_HASH": "PASS",
+    "AUDIT_TRAIL": "PASS",
+    "AUTH": "PASS",
+    "BACKEND_BUILD": "PASS",
+    "CHAT_CREATE": "PASS",
+    "CHAT_STREAM": "PASS",
+    "CONTRACT_VALIDATION": "PASS",
+    "CRITICAL_SECURITY_TESTS": "PASS",
+    "DB_MIGRATIONS": "BLOCKED",
+    "DEPENDENCY_RULES": "PASS",
+    "DEVICE_SESSION": "PASS",
+    "EVENT_REPLAY": "PASS",
+    "FENCING_REJECTS_STALE_WORKER": "PASS",
+    "FRONTEND_BUILD": "PASS",
+    "INBOX_DEDUP": "PASS",
+    "JOB_IDEMPOTENCY": "PASS",
+    "LEASE_EXPIRY_RECOVERY": "PASS",
+    "MISSION_CREATE": "PASS",
+    "MISSION_RESUME": "PASS",
+    "MISSION_STATE_MACHINE": "PASS",
+    "MONOREPO_STRUCTURE": "PASS",
+    "NO_SECRET_LEAK": "PASS",
+    "OUTBOX_ATOMICITY": "PASS",
+    "PHASE_1_E2E": "PASS",
+    "PROJECT_CREATE": "PASS",
+    "PYTHON_TYPECHECK": "BLOCKED",
+    "SSE_RECONNECT": "PASS",
+    "SYSTEM_HEALTH": "PASS",
+    "TS_TYPECHECK": "PASS",
+    "WORKSPACE_CREATE": "PASS"
+  },
+  "migration_static_audit": {
+    "begins_transaction": true,
+    "commits_transaction": true,
+    "has_fencing_token": true,
+    "has_jsonb": true,
+    "has_timestamptz": true,
+    "missing_columns": {},
+    "missing_constraints": [],
+    "missing_tables": [],
+    "static_pass": true,
+    "tables": [
+      "approvals",
+      "artifacts",
+      "audit_events",
+      "conversations",
+      "device_sessions",
+      "evidence_receipts",
+      "inbox_receipts",
+      "jobs",
+      "messages",
+      "missions",
+      "outbox_events",
+      "outbox_publication_receipts",
+      "pairing_codes",
+      "projects",
+      "workspace_bootstrap",
+      "workspaces"
+    ]
+  },
+  "phase": "PHASE_1",
+  "phase_1_certificate_issued": false,
+  "phase_2_allowed": false,
+  "postgres_deep_contract_audit": {
+    "checks": {
+      "artifact_size": true,
+      "bootstrap_generation": true,
+      "job_attempt": true,
+      "job_max_attempts": true,
+      "message_role": true
+    },
+    "foreign_keys": [
+      [
+        "approvals",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "artifacts",
+        "mission_id",
+        "missions",
+        "id"
+      ],
+      [
+        "artifacts",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "audit_events",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "conversations",
+        "project_id",
+        "projects",
+        "id"
+      ],
+      [
+        "conversations",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "device_sessions",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "evidence_receipts",
+        "mission_id",
+        "missions",
+        "id"
+      ],
+      [
+        "evidence_receipts",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "jobs",
+        "mission_id",
+        "missions",
+        "id"
+      ],
+      [
+        "messages",
+        "conversation_id",
+        "conversations",
+        "id"
+      ],
+      [
+        "missions",
+        "conversation_id",
+        "conversations",
+        "id"
+      ],
+      [
+        "missions",
+        "project_id",
+        "projects",
+        "id"
+      ],
+      [
+        "missions",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "outbox_events",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "outbox_publication_receipts",
+        "event_id",
+        "outbox_events",
+        "event_id"
+      ],
+      [
+        "pairing_codes",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "projects",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "workspace_bootstrap",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ]
+    ],
+    "indexes": {
+      "idx_audit_workspace_seq": [
+        "audit_events",
+        [
+          "workspace_id",
+          "seq"
+        ]
+      ],
+      "idx_jobs_lease": [
+        "jobs",
+        [
+          "state",
+          "lease_expires_at"
+        ]
+      ],
+      "idx_outbox_unpublished": [
+        "outbox_events",
+        [
+          "seq"
+        ]
+      ],
+      "idx_outbox_workspace_seq": [
+        "outbox_events",
+        [
+          "workspace_id",
+          "seq"
+        ]
+      ]
+    },
+    "missing_foreign_keys": [],
+    "missing_indexes": [],
+    "pass": true
+  },
+  "qualification_policy_root": "5a21f0b9d219a5b5e6cf6061c145f2c3668f8ed6311ce3b08c9f43bbb3fb33a8",
+  "qualification_siege_policy_root": "da5bec160827f64ec0b839603cd5cfc2e8df40d7b41e5f95c8add48b062601f9",
+  "report_root": "50089813c1c6f58c30ff3ff50cf132bed52b1a728fdb9ddc1c402ac1ee914506",
+  "runtime_deep_schema_audit": {
+    "checks": {
+      "artifact_size_contract": true,
+      "jobs_attempt_nonnegative_contract": true,
+      "jobs_max_attempts_contract": true,
+      "workspace_bootstrap_generation": true
+    },
+    "foreign_keys": [
+      [
+        "conversations",
+        "project_id",
+        "projects",
+        "id"
+      ],
+      [
+        "conversations",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "device_sessions",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "jobs",
+        "mission_id",
+        "missions",
+        "id"
+      ],
+      [
+        "messages",
+        "conversation_id",
+        "conversations",
+        "id"
+      ],
+      [
+        "missions",
+        "conversation_id",
+        "conversations",
+        "id"
+      ],
+      [
+        "missions",
+        "project_id",
+        "projects",
+        "id"
+      ],
+      [
+        "missions",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "outbox_events",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "outbox_publication_receipts",
+        "event_id",
+        "outbox_events",
+        "event_id"
+      ],
+      [
+        "pairing_codes",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "projects",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ],
+      [
+        "workspace_bootstrap",
+        "workspace_id",
+        "workspaces",
+        "id"
+      ]
+    ],
+    "indexes": {
+      "idx_audit_workspace_seq": [
+        "audit_events",
+        [
+          "workspace_id",
+          "seq"
+        ]
+      ],
+      "idx_jobs_lease": [
+        "jobs",
+        [
+          "state",
+          "lease_expires_at"
+        ]
+      ],
+      "idx_outbox_unpublished": [
+        "outbox_events",
+        [
+          "seq"
+        ]
+      ],
+      "idx_outbox_workspace_seq": [
+        "outbox_events",
+        [
+          "workspace_id",
+          "seq"
+        ]
+      ]
+    },
+    "missing_foreign_keys": [],
+    "missing_indexes": [],
+    "pass": true
+  },
+  "runtime_schema_audit": {
+    "missing_columns": {},
+    "missing_tables": [],
+    "static_pass": true
+  },
+  "source_binding": {
+    "contracts_root": "a9278959855cb7665d4bd0768e3b208e636a04d0fe2a8712a7a3ed3b4a2fc787",
+    "migration_root": "e10ffd16ff94fa86784380e185c87052d58140fc4c6a2635fb7fe0d8ef367565",
+    "policy_root": "18a8c512749fbeba8f5d31e35f6c7cef27bdc8d9e308cb14f60b723644ab9ea7",
+    "source_root": "7fcb1b838457b9e93fc6197c2e1e0c978d8f75a0f3652815eab8abad34219bc7"
+  },
+  "source_binding_root": "c0f5f09b9482d4c6077309a024cf17fb136006a6039f87af87a177739bccd3e6",
+  "source_root": "7fcb1b838457b9e93fc6197c2e1e0c978d8f75a0f3652815eab8abad34219bc7",
+  "version": "1.5.0"
+}

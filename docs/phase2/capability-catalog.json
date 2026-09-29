@@ -1,0 +1,411 @@
+{
+  "capabilities": [
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "mission.workspace",
+      "depends_on": [],
+      "owner": "mission-os",
+      "resource_class": "control",
+      "risk_class": "low",
+      "runtime_kind": "control-plane",
+      "wave": 1
+    },
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "capability.registry",
+      "depends_on": [
+        "mission.workspace"
+      ],
+      "owner": "mission-os",
+      "resource_class": "control",
+      "risk_class": "low",
+      "runtime_kind": "control-plane",
+      "wave": 1
+    },
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "worker.protocol",
+      "depends_on": [
+        "capability.registry"
+      ],
+      "owner": "execution-os",
+      "resource_class": "control",
+      "risk_class": "low",
+      "runtime_kind": "contract",
+      "wave": 2
+    },
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "tool.protocol",
+      "depends_on": [
+        "capability.registry"
+      ],
+      "owner": "execution-os",
+      "resource_class": "control",
+      "risk_class": "low",
+      "runtime_kind": "contract",
+      "wave": 2
+    },
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "artifact.graph",
+      "depends_on": [
+        "mission.workspace"
+      ],
+      "owner": "artifact-os",
+      "resource_class": "control",
+      "risk_class": "medium",
+      "runtime_kind": "platform",
+      "wave": 2
+    },
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "code.repository",
+      "depends_on": [
+        "worker.protocol",
+        "tool.protocol",
+        "artifact.graph"
+      ],
+      "owner": "build-os",
+      "resource_class": "cpu",
+      "risk_class": "high",
+      "runtime_kind": "worker",
+      "wave": 3
+    },
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "build.test",
+      "depends_on": [
+        "code.repository"
+      ],
+      "owner": "build-os",
+      "resource_class": "cpu",
+      "risk_class": "high",
+      "runtime_kind": "worker",
+      "wave": 3
+    },
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "browser.computer",
+      "depends_on": [
+        "worker.protocol",
+        "tool.protocol",
+        "artifact.graph"
+      ],
+      "owner": "computer-os",
+      "resource_class": "browser",
+      "risk_class": "critical",
+      "runtime_kind": "worker",
+      "wave": 4
+    },
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "research.knowledge",
+      "depends_on": [
+        "worker.protocol",
+        "tool.protocol",
+        "artifact.graph"
+      ],
+      "owner": "research-os",
+      "resource_class": "cpu",
+      "risk_class": "high",
+      "runtime_kind": "worker",
+      "wave": 5
+    },
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "document.data",
+      "depends_on": [
+        "worker.protocol",
+        "tool.protocol",
+        "artifact.graph"
+      ],
+      "owner": "data-os",
+      "resource_class": "cpu",
+      "risk_class": "high",
+      "runtime_kind": "worker",
+      "wave": 5
+    },
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "model.router",
+      "depends_on": [
+        "capability.registry",
+        "artifact.graph"
+      ],
+      "owner": "ai-os",
+      "resource_class": "gpu",
+      "risk_class": "medium",
+      "runtime_kind": "platform",
+      "wave": 6
+    },
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "gpu.runtime",
+      "depends_on": [
+        "worker.protocol",
+        "model.router"
+      ],
+      "owner": "ai-os",
+      "resource_class": "gpu",
+      "risk_class": "critical",
+      "runtime_kind": "worker",
+      "wave": 6
+    },
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "media.pipeline",
+      "depends_on": [
+        "worker.protocol",
+        "tool.protocol",
+        "artifact.graph"
+      ],
+      "owner": "media-os",
+      "resource_class": "gpu",
+      "risk_class": "high",
+      "runtime_kind": "worker",
+      "wave": 7
+    },
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "android.lab",
+      "depends_on": [
+        "worker.protocol",
+        "tool.protocol",
+        "artifact.graph"
+      ],
+      "owner": "android-os",
+      "resource_class": "device",
+      "risk_class": "critical",
+      "runtime_kind": "worker",
+      "wave": 7
+    },
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "automation.sdk",
+      "depends_on": [
+        "capability.registry",
+        "worker.protocol",
+        "tool.protocol"
+      ],
+      "owner": "automation-os",
+      "resource_class": "mixed",
+      "risk_class": "critical",
+      "runtime_kind": "platform",
+      "wave": 8
+    },
+    {
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "capability_id": "cross.domain.qualification",
+      "depends_on": [
+        "build.test",
+        "browser.computer",
+        "research.knowledge",
+        "document.data",
+        "gpu.runtime",
+        "media.pipeline",
+        "android.lab",
+        "automation.sdk"
+      ],
+      "owner": "assurance-os",
+      "resource_class": "mixed",
+      "risk_class": "high",
+      "runtime_kind": "assurance",
+      "wave": 9
+    }
+  ],
+  "implementation_allowed": false,
+  "scope": "phase2-design-only-v1"
+}

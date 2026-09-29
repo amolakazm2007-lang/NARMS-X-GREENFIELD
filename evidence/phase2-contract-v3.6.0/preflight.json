@@ -1,0 +1,20 @@
+{
+  "constitution_report_root": "ca598a19426049ecf38d7e11b4d71dc1a080f8874b1188424438a54dc695079b",
+  "constitution_root": "5d8103a6c084a5257ae2d288b2952e28b6f2bf4373c296f353ec3b5fee702a8a",
+  "implementation_allowed": false,
+  "phase1_local_status": "30/32 BLOCKED",
+  "phase2_opening_allowed_without_trusted_phase1_certificate": false,
+  "phase2_opening_reasons": [
+    "phase1_trusted_certificate_missing"
+  ],
+  "phase2_opening_root": "3fb8968406cf7f4e008bc2c4ac4995842191c932677d098212e5082dae69a2d4",
+  "phase2_runtime_started": false,
+  "quota_overage_allowed": false,
+  "release_version": "3.6.0",
+  "success_transition_without_evidence_allowed": false,
+  "tool_contract_valid": true,
+  "tool_root": "ea347a37912b9fa6e6284859aa84026522b5521e2e509315656d071cd14ad7c9",
+  "unsafe_non_idempotent_replay_action": "ESCALATE",
+  "worker_contract_valid": true,
+  "worker_root": "456e81f53b080e1e0c2713beb796501584771b294cb9c04fa3ac7b374925cc3a"
+}

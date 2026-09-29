@@ -1,0 +1,10 @@
+{
+  "invalid_promotion_blocked": true,
+  "phase2_allowed": false,
+  "phase2_components_started": false,
+  "snapshot_verifies": true,
+  "source_snapshot_files": 118,
+  "source_snapshot_root": "dbbc3bfa532e04b5b9139c6300db1f2bbed38fe3c405637e7a05e837e4896ba3",
+  "truth_boundary": "Local integrity mechanics only; no 32/32 trusted Phase-1 certificate is fabricated.",
+  "version": "2.2.0"
+}

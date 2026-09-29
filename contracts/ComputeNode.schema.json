@@ -1,0 +1,61 @@
+{
+  "$id": "narms://contracts/v1/ComputeNode.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "actor": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "causation_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "correlation_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "idempotency_key": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "kind": {
+      "const": "ComputeNode"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "type": "string"
+    },
+    "trace_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "workspace_id": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "workspace_id",
+    "trace_id",
+    "idempotency_key",
+    "correlation_id",
+    "actor",
+    "created_at",
+    "kind"
+  ],
+  "title": "ComputeNode",
+  "type": "object"
+}

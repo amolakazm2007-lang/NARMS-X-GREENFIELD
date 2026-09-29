@@ -1,0 +1,1 @@
+{"name":"narms-x-web-phase1","private":true,"scripts":{"typecheck":"tsc -p tsconfig.json","build":"rm -rf dist && tsc -p tsconfig.build.json && node scripts/build.mjs"}}

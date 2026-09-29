@@ -1,0 +1,1 @@
+STATIC CONTRACT PASS. BLOCKED: migration has not been executed against a real PostgreSQL instance because psql/postgres/psycopg are unavailable.

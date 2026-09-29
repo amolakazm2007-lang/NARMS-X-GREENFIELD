@@ -1,0 +1,9 @@
+{
+  "status": "BLOCKED",
+  "blockers": {
+    "PYTHON_TYPECHECK": "mypy/pyright unavailable in current environment",
+    "DB_MIGRATIONS": "migration static contract PASS, but real PostgreSQL execution unavailable"
+  },
+  "report_root": "2735de47b44c62c06ceb7425611d4658acedeef6e0a59ecbf5847cad0c300a37",
+  "migration_static_pass": true
+}

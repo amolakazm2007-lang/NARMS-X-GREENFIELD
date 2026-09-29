@@ -1,0 +1,6 @@
+{
+  "status": "FAIL",
+  "violations": [
+    "root-sprawl:RELEASE.json"
+  ]
+}

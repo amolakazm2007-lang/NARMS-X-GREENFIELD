@@ -1,0 +1,29 @@
+{
+  "blockers": [
+    "PYTHON_TYPECHECK:real Python typechecker unavailable: install mypy",
+    "DB_MIGRATIONS:NARMS_PHASE1_POSTGRES_DSN is required"
+  ],
+  "observed": {
+    "mypy": null,
+    "mypy_version": null,
+    "platform_python": "3.13.5",
+    "postgres_dsn_present": false,
+    "postgres_version": null,
+    "psql": null,
+    "psql_version": null,
+    "python_311_exact": false,
+    "python_version": "3.13.5"
+  },
+  "postgres_migration": null,
+  "python_typecheck": null,
+  "report_root": "8d11429483a49fe3ae6bf6a5f58678bc7960a04cd5bbdf76102f846fc9a87d9f",
+  "requirements": {
+    "postgres_server_major": "16",
+    "psql_major": "16",
+    "python": "3.11.x",
+    "python_typechecker": "mypy-real",
+    "synthetic_evidence_allowed": false
+  },
+  "scope": "phase1-real-closure-environment-v1",
+  "status": "BLOCKED"
+}

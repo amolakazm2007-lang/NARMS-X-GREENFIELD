@@ -1,0 +1,17 @@
+{
+  "all_non_executable": true,
+  "conformance_matrix_root": "02ada3a716a649a27d49f80cafd2d5b5ffab09c2f67e51dd499c322a50810422",
+  "cross_domain_reference_qualified": true,
+  "phase1_qualification_identity": "v2.8.0",
+  "phase2_runtime_started": false,
+  "reference_conformance_passed": 16,
+  "report_root": "09a5e184c200dd376cecfc40cd254aa58fe94a83590737e8bc38e1d2cd9e217e",
+  "sealed_root": "3fd8a139b034eca8f179befadf984dd89cb3917f0e89cc438f72bc70d63ae43b",
+  "sealed_skeletons": 16,
+  "truth_boundary": "Reference contracts and synthetic conformance evidence only. Phase 1 remains 30/32 locally; no Phase-2 runtime or production capability is started or authorized.",
+  "version": "4.2.0",
+  "wave1_block_reasons": [
+    "trusted_phase2_opening_required"
+  ],
+  "wave1_currently_allowed": false
+}

@@ -1,0 +1,38 @@
+{
+  "allowed_roots": [
+    "apps",
+    "control-plane",
+    "intelligence",
+    "execution-plane",
+    "platform",
+    "contracts",
+    "packages",
+    "migrations",
+    "infra",
+    "tests",
+    "benchmarks",
+    "docs",
+    "scripts",
+    "evidence",
+    ".github"
+  ],
+  "forbidden_phase1_tech": [
+    "kafka",
+    "temporal",
+    "kubernetes",
+    "qdrant",
+    "neo4j",
+    "firecracker",
+    "gvisor",
+    "redis"
+  ],
+  "phase1_forbidden_implementation_roots": [
+    "intelligence/model-router",
+    "execution-plane/gpu-worker",
+    "execution-plane/browser-worker",
+    "execution-plane/training-worker",
+    "execution-plane/media-worker",
+    "platform/code-server",
+    "platform/model-registry"
+  ]
+}

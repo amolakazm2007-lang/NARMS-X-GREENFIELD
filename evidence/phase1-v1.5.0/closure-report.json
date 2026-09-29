@@ -1,0 +1,15 @@
+{
+  "blockers": [
+    "PYTHON_TYPECHECK:real Python typechecker unavailable: install pyright or mypy",
+    "DB_MIGRATIONS:NARMS_PHASE1_POSTGRES_DSN is required"
+  ],
+  "environment": {
+    "postgres_dsn_present": false,
+    "psql": null,
+    "python_typechecker": null
+  },
+  "postgres": null,
+  "python_typecheck": null,
+  "report_root": "081a22cf2e97c4ca4de52f79d3cdfcb999e7adb4c14f39eb4ab9d074d804f565",
+  "status": "BLOCKED"
+}

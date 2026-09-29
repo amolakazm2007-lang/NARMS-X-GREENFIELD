@@ -1,0 +1,4 @@
+
+> build
+> rm -rf dist && tsc -p tsconfig.build.json && node scripts/build.mjs
+
