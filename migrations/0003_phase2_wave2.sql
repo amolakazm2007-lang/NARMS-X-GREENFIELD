@@ -1,6 +1,6 @@
 BEGIN;
 
-INSERT INTO phase2_schema_migrations(version,name)
+ALTER TABLE phase2_capability_registry DROP CONSTRAINT IF EXISTS phase2_capability_registry_wave_check;\nALTER TABLE phase2_capability_registry ADD CONSTRAINT phase2_capability_registry_wave_check CHECK(wave IN (1,2));\n\nINSERT INTO phase2_schema_migrations(version,name)
 VALUES (3,'phase2-wave2-v1')
 ON CONFLICT (version) DO UPDATE SET name=EXCLUDED.name;
 
