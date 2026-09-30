@@ -9,6 +9,7 @@ from typing import Any, Mapping, Sequence
 from uuid import UUID, uuid4
 
 import psycopg
+from jsonschema import ValidationError, validate
 from psycopg.rows import dict_row
 
 from packages.phase2_wave1 import OpeningReceipt, load_opening, root
