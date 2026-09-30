@@ -54,6 +54,16 @@ CREATE TABLE phase2_tool_registry(
   created_at timestamptz NOT NULL DEFAULT now()
 );
 
+CREATE TABLE phase2_tool_approval_bindings(
+  approval_id uuid PRIMARY KEY REFERENCES approvals(id) ON DELETE CASCADE,
+  workspace_id uuid NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE,
+  mission_id uuid NOT NULL REFERENCES missions(id) ON DELETE CASCADE,
+  tool_id text NOT NULL REFERENCES phase2_tool_registry(tool_id),
+  request_root char(64) NOT NULL,
+  expires_at timestamptz NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
 CREATE TABLE phase2_tool_calls(
   call_id uuid PRIMARY KEY,
   workspace_id uuid NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE,
