@@ -1,4 +1,5 @@
 import json, tempfile, threading, sys
+from typing import Any
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]; sys.path.insert(0,str(ROOT))
 import pytest
@@ -23,7 +24,9 @@ def test_concurrent_lease_race_has_one_winner():
             with lock: results.append(out)
             st.db.close()
         ts=[threading.Thread(target=worker,args=(x,)) for x in ('A','B')]
-        [t.start() for t in ts]; barrier.wait(); [t.join() for t in ts]
+        for t in ts: t.start()
+        barrier.wait()
+        for t in ts: t.join()
         assert sum(r[0]=='ok' for r in results)==1
         check=Store(path); row=check.db.execute('select fencing_token,attempt from jobs where id=?',(j,)).fetchone(); assert row['fencing_token']==1 and row['attempt']==1
 
@@ -34,7 +37,9 @@ def test_session_rotation_race_only_one_successor():
         try: out=('ok',q.rotate_session(token))
         except Exception as e: out=('err',type(e).__name__)
         with lock: results.append(out)
-    ts=[threading.Thread(target=rotate) for _ in range(2)]; [t.start() for t in ts]; barrier.wait(); [t.join() for t in ts]
+    ts=[threading.Thread(target=rotate) for _ in range(2)]; for t in ts: t.start()
+        barrier.wait()
+        for t in ts: t.join()
     assert sum(r[0]=='ok' for r in results)==1
     active=s.db.execute('select count(*) from device_sessions where workspace_id=? and revoked_at is null',(w,)).fetchone()[0]; assert active==1
 
@@ -45,7 +50,9 @@ def test_pairing_code_enroll_race_is_single_use():
         try: out=('ok',q.enroll(code))
         except Exception as e: out=('err',type(e).__name__)
         with lock: results.append(out)
-    ts=[threading.Thread(target=enroll) for _ in range(2)]; [t.start() for t in ts]; barrier.wait(); [t.join() for t in ts]
+    ts=[threading.Thread(target=enroll) for _ in range(2)]; for t in ts: t.start()
+        barrier.wait()
+        for t in ts: t.join()
     assert sum(r[0]=='ok' for r in results)==1
     assert s.db.execute('select count(*) from device_sessions where workspace_id=?',(w,)).fetchone()[0]==1
 
@@ -56,7 +63,7 @@ def test_runtime_and_postgres_contract_have_same_required_columns():
 
 def test_sse_last_event_id_reconnect_and_workspace_isolation(monkeypatch):
     import importlib
-    appmod=importlib.import_module('control-plane.api.app')
+    appmod: Any=importlib.import_module('control-plane.api.app')
     appmod.store=Store(); appmod.pairing=PairingService(appmod.store)
     w=appmod.store.workspace('w'); b=appmod.pairing.provision_workspace(w); token=appmod.pairing.enroll(appmod.pairing.issue(w,b)); p=appmod.store.project(w,'p'); rows=appmod.store.events_after(); cursor=rows[-2]['seq']
     client=TestClient(appmod.app); r=client.get('/api/v1/events',headers={'Authorization':'Bearer '+token,'Last-Event-ID':str(cursor)})
