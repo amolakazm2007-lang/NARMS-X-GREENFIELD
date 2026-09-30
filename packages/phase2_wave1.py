@@ -113,7 +113,7 @@ def load_opening(path: Path = DEFAULT_OPENING) -> OpeningReceipt:
             reasons.append("opening_decision_root_mismatch")
     if reasons:
         raise OpeningDenied(",".join(sorted(set(reasons))))
-    return OpeningReceipt(**fields)  # type: ignore[arg-type]
+    return OpeningReceipt(**fields)
 
 
 def load_manifest(path: Path = DEFAULT_MANIFEST) -> dict[str, Any]:
