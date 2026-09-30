@@ -1,55 +1,45 @@
 {
-  "architecture_doctor": "PASS",
-  "architecture_violations": 0,
-  "backend_compileall": "PASS",
-  "db_migrations": "BLOCKED_REAL_POSTGRESQL_16_UNAVAILABLE_IN_EXECUTION_ENVIRONMENT",
-  "legacy_report_version_rewrite_removed": true,
-  "native_current_qualification": true,
-  "out_of_band_trust_anchor_required": true,
-  "phase": "PHASE_1",
-  "phase2_admission_certificate_added": true,
-  "phase2_all_skeletons_non_executable": true,
-  "phase2_artifact_graph_contract_added": true,
-  "phase2_components_started": false,
-  "phase2_conformance_fortress_added": true,
-  "phase2_contract_constitution_added": true,
-  "phase2_contract_preflight": "PASS",
-  "phase2_contract_preflight_path": "evidence/phase2-contract-v3.6.0/preflight.json",
-  "phase2_cross_domain_qualification_added": true,
-  "phase2_design_capabilities": 16,
-  "phase2_design_compiler_added": true,
-  "phase2_design_implementation_allowed": false,
-  "phase2_design_waves": 9,
-  "phase2_mission_state_machine_added": true,
-  "phase2_opening_fortress_added": true,
-  "phase2_recovery_idempotency_model_added": true,
-  "phase2_runtime_implementation_allowed": false,
-  "phase2_scheduler_quota_contract_added": true,
-  "phase2_sealed_preflight": "PASS",
-  "phase2_sealed_preflight_path": "evidence/phase2-sealed-v4.2.0/preflight.json",
-  "phase2_sealed_skeleton_count": 16,
-  "phase2_sealed_skeletons_added": true,
-  "phase2_wave1_currently_allowed": false,
-  "phase2_wave_admission_added": true,
-  "phase2_worker_tool_protocols_added": true,
-  "phase_1_certificate_issued": false,
-  "phase_2_allowed": false,
-  "portable_postgres_ci_qualification": true,
-  "portable_real_python_typecheck_ci": true,
-  "pyright_not_accepted_for_closure": true,
-  "python_typecheck": "BLOCKED_REAL_PYTHON_3_11_MYPY_UNAVAILABLE_IN_EXECUTION_ENVIRONMENT",
-  "qualification_gates_passed": 30,
-  "qualification_gates_total": 32,
-  "real_closure_environment_report": "evidence/phase1-real-closure-v4.3.0/environment-report.json",
-  "real_closure_requires_mypy": true,
-  "real_closure_requires_postgresql_16": true,
-  "real_closure_requires_psql_16": true,
-  "real_closure_requires_python_311": true,
-  "real_live_schema_validation_required": true,
-  "status": "BLOCKED",
-  "tests_passed": 127,
-  "truth_boundary": "v4.3 hardens the existing Phase-1 real-closure path to require Python 3.11, real mypy, psql 16 and PostgreSQL server 16 with live migration/apply/reapply/schema-validation/rollback/final-reapply evidence. The current execution environment lacks those required tools, so Phase 1 remains 30/32 BLOCKED. No closure attestation, trusted certificate, Phase-2 opening, or Wave-1 runtime is issued or started.",
   "version": "4.3.0",
-  "wave1_implementation_started": false,
-  "workflow_identity": "phase1-closure.yml@v2.8.0"
+  "milestone": "PHASE_2_WAVE_1",
+  "status": "PASS",
+  "main_baseline_merge_commit": "33cd029fa2fd807a4062782d37d46eb05122b0d0",
+  "phase1": {
+    "closure": "PASS",
+    "qualification_gates_passed": 32,
+    "qualification_gates_total": 32,
+    "real_python_311_mypy": true,
+    "real_postgresql_16": true,
+    "closure_attestation": "PASS"
+  },
+  "phase2": {
+    "opening_decision": "PASS",
+    "wave1": "PASS",
+    "wave1_capabilities": [
+      "mission.workspace",
+      "capability.registry"
+    ],
+    "wave1_postgres_authoritative": true,
+    "wave1_real_migration": true,
+    "wave1_real_rollback": true,
+    "wave1_final_reapply": true,
+    "wave2_started": false
+  },
+  "ci": {
+    "phase1_closure_workflow": "PASS",
+    "phase2_wave1_workflow": "PASS"
+  },
+  "trust_boundary": {
+    "repository_private_key_present": false,
+    "note": "The repository pins a release trust anchor and signed opening evidence. Before production promotion, move signing authority to an independently controlled secret/KMS/HSM workflow and preserve key-rotation/revocation procedures."
+  },
+  "next_wave": {
+    "wave": 2,
+    "capabilities": [
+      "worker.protocol",
+      "tool.protocol",
+      "artifact.graph"
+    ],
+    "rule": "Do not start Wave 3 or GPU/model/browser runtimes until Wave 2 is implemented, tested, rollback-qualified, and merged with green CI."
+  },
+  "truth_boundary": "Only Phase-2 Wave 1 is executable today. Contract/design files for later waves are not proof that those runtimes exist."
 }

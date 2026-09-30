@@ -1,3 +1,19 @@
+# NARMS X GREENFIELD — Current Verified State
+
+**Current milestone:** Phase 2 / Wave 1 is merged to `main` and both required GitHub Actions workflows pass on the merge.
+
+- Phase-1 closure: **32/32 PASS** in real CI (CPython 3.11 + mypy + PostgreSQL/psql 16).
+- Closure attestation: **PASS**.
+- Trusted Phase-2 opening decision: **PASS**.
+- Phase-2 Wave 1: **implemented and CI-qualified**.
+- Wave-1 executable capabilities: `mission.workspace` and `capability.registry`.
+- Wave-1 state is PostgreSQL-authoritative with real migration, rollback, final reapply, optimistic revisions, mission history, capability history, audit/outbox integration, and fail-closed opening verification.
+- Phase-2 Wave 2+ is **not implemented yet**. Worker/tool execution, artifact graph runtime, code/build workers, browser, model router, GPU runtime, media, Android lab, training and automation remain future work.
+
+See `docs/ASTRA_HANDOFF.md` before continuing development.
+
+---
+
 # NARMS X GREENFIELD v4.3.0
 
 ## Real Phase-1 closure hardening
