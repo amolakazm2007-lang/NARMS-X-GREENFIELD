@@ -417,10 +417,12 @@ class PostgresWave2Runtime:
     def create_artifact_revision(self, *, workspace_id: str, mission_id: str, logical_artifact_id: str,
                                  content: bytes, storage_uri: str, media_type: str,
                                  provenance: Mapping[str, Any], evidence_root: str,
-                                 parents: Sequence[str] = ()) -> dict[str, Any]:
+                                 parents: Sequence[str] = (), expected_content_sha256: str | None = None) -> dict[str, Any]:
         if not _hex64(evidence_root):
             raise ArtifactViolation("invalid evidence root")
         content_sha = sha256_bytes(content)
+        if expected_content_sha256 is not None and expected_content_sha256 != content_sha:
+            raise ArtifactViolation("artifact content/source drift")
         provenance_root = root(dict(provenance))
         revision_id = str(uuid4())
         with psycopg.connect(self.dsn, row_factory=dict_row) as conn:
