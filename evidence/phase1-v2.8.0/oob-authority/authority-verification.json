@@ -1,12 +1,12 @@
 {
   "authority_key_id": "773235e774f6e31cdb412eee",
-  "certificate_fingerprint": "a7282c4d02a5f0cdea55dcdd0b409231fd830908602f105bbb16e5f253508031",
-  "closure_attestation_root": "00d387471dca7ee1790ad249486a39fb445bf77e1a38ad636caba6ef858a13c8",
+  "certificate_fingerprint": "1d839f8880298f40d67dd4763d91df590ac4af6b8dc2ab508bf1402fbc9a35e3",
+  "closure_attestation_root": "12d6c062950848d25e2b9761e400e08fdf85a7dbf33ebe729547a503894dc7b1",
   "private_key_in_repository": false,
   "qualification_passed": 32,
-  "qualification_root": "0f8d8231ab3ef8231d08fc2bde82a96c7f744413eb8bb89ba1eb0ff9156731a0",
+  "qualification_root": "952f8d407b62edb0b52888756ec1941d3485736637501e313cef64a34e167a94",
   "qualification_total": 32,
   "signature_verified": true,
-  "source_root": "57e341caef67dc8824c38f5b22b8124cc4bfa97b0c8bde24047596ac0298f607",
+  "source_root": "5858abdcdbf90c64c7a83c33a406e000e9fcb72ac520e27f435b7ee9ab0ecfd9",
   "status": "PASS"
 }
