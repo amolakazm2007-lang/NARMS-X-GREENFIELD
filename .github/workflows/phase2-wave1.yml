@@ -21,7 +21,8 @@ jobs:
           --health-interval 5s --health-timeout 5s --health-retries 20
     env:
       NARMS_PHASE1_POSTGRES_DSN: postgresql://postgres:postgres@127.0.0.1:5432/narms_phase2
-      NARMS_PHASE2_POSTGRES_DSN: postgresql://postgres:postgres@127.0.0.1:5432/narms_phase2\n      NARMS_PHASE2_TESTS: "1"
+      NARMS_PHASE2_POSTGRES_DSN: postgresql://postgres:postgres@127.0.0.1:5432/narms_phase2
+      NARMS_PHASE2_TESTS: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
