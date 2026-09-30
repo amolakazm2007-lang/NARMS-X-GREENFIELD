@@ -1,0 +1,69 @@
+name: phase2-wave1
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, phase2-wave1-runtime ]
+  pull_request:
+
+jobs:
+  qualify-wave1:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: narms_phase2
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres -d narms_phase2"
+          --health-interval 5s --health-timeout 5s --health-retries 20
+    env:
+      NARMS_PHASE1_POSTGRES_DSN: postgresql://postgres:postgres@127.0.0.1:5432/narms_phase2
+      NARMS_PHASE2_POSTGRES_DSN: postgresql://postgres:postgres@127.0.0.1:5432/narms_phase2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - name: Install Wave-1 tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "psycopg[binary]>=3.2" pytest mypy cryptography jsonschema httpx "fastapi>=0.110" "pydantic>=2"
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+          python - <<'PY'
+          import sys
+          assert sys.version_info[:2] == (3, 11), sys.version
+          PY
+          psql --version | grep -E ' 16([.]|$)'
+      - name: Apply Phase-1 schema
+        run: psql "$NARMS_PHASE2_POSTGRES_DSN" -X -v ON_ERROR_STOP=1 -f migrations/0001_phase1.sql
+      - name: Apply Wave-1 schema
+        run: psql "$NARMS_PHASE2_POSTGRES_DSN" -X -v ON_ERROR_STOP=1 -f migrations/0002_phase2_wave1.sql
+      - name: Wave-1 mypy
+        run: mypy --python-version 3.11 --explicit-package-bases packages/phase2_wave1.py tests/test_phase2_wave1.py scripts/phase2_wave1_qualify.py
+      - name: Wave-1 real tests
+        run: python -m pytest -q tests/test_phase2_wave1.py
+      - name: Wave-1 qualification
+        run: python scripts/phase2_wave1_qualify.py
+      - name: Assert Wave-1 qualification
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('evidence/phase2-wave1-v1/qualification-report.json'))
+          assert p['status'] == 'PASS', p
+          assert p['passed'] == p['total'] == 8, p
+          print('PHASE 2 WAVE 1: 8/8 PASS')
+          PY
+      - name: Real rollback
+        run: |
+          psql "$NARMS_PHASE2_POSTGRES_DSN" -X -v ON_ERROR_STOP=1 -f migrations/0002_phase2_wave1.down.sql
+          test "$(psql "$NARMS_PHASE2_POSTGRES_DSN" -X -At -c "select count(*) from information_schema.tables where table_schema='public' and table_name like 'phase2_%';")" = "0"
+      - name: Final reapply
+        run: psql "$NARMS_PHASE2_POSTGRES_DSN" -X -v ON_ERROR_STOP=1 -f migrations/0002_phase2_wave1.sql
+      - name: Upload Wave-1 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase2-wave1-v1-evidence
+          path: evidence/phase2-wave1-v1/qualification-report.json
