@@ -57,6 +57,11 @@ def main() -> int:
         ).fetchall()
     tables = {x[0] for x in table_rows}
     indexes = {x[0] for x in index_rows}
+    # Qualification owns a clean Wave-1 schema before rerunning the stateful real tests.
+    # Phase-1 tables remain intact; only Wave-1 state is reset.
+    runtime.rollback()
+    runtime.migrate()
+
     gates = {
         "OPENING_TRUST": bool(opening.opening_decision_root),
         "PYTHON_311": platform.python_version().startswith("3.11."),
