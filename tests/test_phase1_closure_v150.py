@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any
 import pytest
 from packages.phase1_closure import closure_environment, postgres_migration_qualification, python_typecheck
 
@@ -23,6 +24,6 @@ def test_down_migration_is_transactional_and_complete():
 def test_certificate_refuses_30_of_32_report():
     from packages.phase1_closure import issue_phase1_certificate_from_report
     from packages.phase1_qualification import REQUIRED_GATES
-    report={'version':'1.5.0','report_root':'r','source_root':'s','gates':{g:'PASS' for g in REQUIRED_GATES},'blockers':{'DB_MIGRATIONS':'blocked'}}
+    report: dict[str, Any]={'version':'1.5.0','report_root':'r','source_root':'s','gates':{g:'PASS' for g in REQUIRED_GATES},'blockers':{'DB_MIGRATIONS':'blocked'}}
     report['gates']['DB_MIGRATIONS']='BLOCKED'
     with pytest.raises(RuntimeError,match='32/32'): issue_phase1_certificate_from_report(report,'00'*32)
