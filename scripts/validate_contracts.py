@@ -1,6 +1,6 @@
 from pathlib import Path
 import json,sys
-from jsonschema import Draft202012Validator
+from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
 root=Path(__file__).resolve().parents[1]/'contracts';bad=[]
 for p in sorted(root.glob('*.schema.json')):
  try:Draft202012Validator.check_schema(json.loads(p.read_text()))
