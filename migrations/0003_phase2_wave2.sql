@@ -128,6 +128,17 @@ CREATE TABLE phase2_wave2_quotas(
   updated_at timestamptz NOT NULL DEFAULT now()
 );
 
+CREATE OR REPLACE FUNCTION phase2_reject_artifact_mutation() RETURNS trigger LANGUAGE plpgsql AS $
+BEGIN
+  RAISE EXCEPTION 'Wave-2 artifact graph is append-only';
+END $;
+CREATE TRIGGER trg_phase2_artifact_objects_immutable BEFORE UPDATE OR DELETE ON phase2_artifact_objects
+FOR EACH ROW EXECUTE FUNCTION phase2_reject_artifact_mutation();
+CREATE TRIGGER trg_phase2_artifact_revisions_immutable BEFORE UPDATE OR DELETE ON phase2_artifact_revisions
+FOR EACH ROW EXECUTE FUNCTION phase2_reject_artifact_mutation();
+CREATE TRIGGER trg_phase2_artifact_edges_immutable BEFORE UPDATE OR DELETE ON phase2_artifact_edges
+FOR EACH ROW EXECUTE FUNCTION phase2_reject_artifact_mutation();
+
 CREATE INDEX idx_phase2_workers_workspace_state ON phase2_workers(workspace_id,state);
 CREATE INDEX idx_phase2_worker_leases_job_state ON phase2_worker_leases(job_id,state);
 CREATE INDEX idx_phase2_worker_leases_expiry ON phase2_worker_leases(state,lease_expires_at);
