@@ -18,7 +18,7 @@ def run(cmd,cwd=ROOT):
  return {'command':cmd,'returncode':p.returncode,'normalized_output_sha256':hashlib.sha256(normalized.encode()).hexdigest(),'normalized_output_tail':normalized[-2000:]}
 
 def source_root():
- excluded={'.git','evidence','node_modules','dist','__pycache__','.pytest_cache'}; rows=[]
+ excluded={'.git','evidence','node_modules','dist','__pycache__','.pytest_cache','.mypy_cache'}; rows=[]
  for p in sorted(x for x in ROOT.rglob('*') if x.is_file()):
   rel=p.relative_to(ROOT)
   if any(part in excluded for part in rel.parts) or p.name in {'MANIFEST.sha256','RELEASE.json'}:continue
