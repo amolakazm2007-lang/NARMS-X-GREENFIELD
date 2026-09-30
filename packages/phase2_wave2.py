@@ -352,6 +352,10 @@ class PostgresWave2Runtime:
                 if not tool or tool["opening_root"] != self.opening.opening_decision_root:
                     raise CapabilityBlocked("unknown/disabled/stale tool")
                 self._assert_capability(cur, str(tool["capability_id"]))
+                try:
+                    validate(instance=dict(envelope.payload), schema=tool["input_schema"])
+                except ValidationError as exc:
+                    raise Wave2Error(f"tool input schema violation: {exc.message}") from exc
                 self._approval(cur, approval_id, envelope.workspace_id, tool_id, str(tool["risk_class"]))
                 prior = cur.execute(
                     "SELECT * FROM phase2_tool_calls WHERE workspace_id=%s AND mission_id=%s AND idempotency_key=%s",
@@ -399,6 +403,14 @@ class PostgresWave2Runtime:
                     raise StaleFence("stale tool completion")
                 if call["lease_state"] != "ACTIVE" or call["lease_expires_at"] <= datetime.now(timezone.utc):
                     raise StaleFence("expired lease")
+                if result is not None:
+                    tool = cur.execute("SELECT output_schema FROM phase2_tool_registry WHERE tool_id=%s", (call["tool_id"],)).fetchone()
+                    if not tool:
+                        raise CapabilityBlocked("tool disappeared")
+                    try:
+                        validate(instance=dict(result.payload), schema=tool["output_schema"])
+                    except ValidationError as exc:
+                        raise Wave2Error(f"tool output schema violation: {exc.message}") from exc
                 state = "SUCCEEDED" if result else ("RETRYABLE" if retryable else "FAILED")
                 payload = dict(result.payload) if result else None
                 result_root = result.result_root if result else None
