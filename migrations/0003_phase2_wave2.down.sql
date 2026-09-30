@@ -8,5 +8,5 @@ DROP TABLE IF EXISTS phase2_worker_leases CASCADE;
 DROP TABLE IF EXISTS phase2_workers CASCADE;
 DROP TABLE IF EXISTS phase2_wave2_idempotency CASCADE;
 DROP TABLE IF EXISTS phase2_wave2_quotas CASCADE;
-DELETE FROM phase2_capability_registry WHERE wave=2;\nALTER TABLE phase2_capability_registry DROP CONSTRAINT IF EXISTS phase2_capability_registry_wave_check;\nALTER TABLE phase2_capability_registry ADD CONSTRAINT phase2_capability_registry_wave_check CHECK(wave=1);\nDELETE FROM phase2_schema_migrations WHERE version=3;
+DROP FUNCTION IF EXISTS phase2_reject_artifact_mutation() CASCADE;\nDELETE FROM phase2_capability_registry WHERE wave=2;\nALTER TABLE phase2_capability_registry DROP CONSTRAINT IF EXISTS phase2_capability_registry_wave_check;\nALTER TABLE phase2_capability_registry ADD CONSTRAINT phase2_capability_registry_wave_check CHECK(wave=1);\nDELETE FROM phase2_schema_migrations WHERE version=3;
 COMMIT;
