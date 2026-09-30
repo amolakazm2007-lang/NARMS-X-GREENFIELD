@@ -55,7 +55,7 @@ def python_typecheck(root: Path) -> ToolReceipt:
         raise RuntimeError('real Python typechecker unavailable: install mypy')
     if sys.version_info[:2] != (3, 11):
         raise RuntimeError(f'real closure requires Python 3.11 exactly; running {sys.version_info.major}.{sys.version_info.minor}')
-    cmd = [mypy, '--python-version', '3.11', 'packages', 'control-plane', 'scripts', 'tests']
+    cmd = [mypy, '--python-version', '3.11', '--explicit-package-bases', 'packages', 'control-plane', 'scripts', 'tests']
     tool = 'mypy'
     vcmd = [mypy, '--version']
     vrc, version = _run(vcmd, root)

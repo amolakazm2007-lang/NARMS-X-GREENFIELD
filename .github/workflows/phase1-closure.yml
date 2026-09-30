@@ -44,7 +44,7 @@ jobs:
         working-directory: apps/web
         run: npm install
       - name: Real Python 3.11 typecheck
-        run: mypy --python-version 3.11 packages control-plane scripts tests
+        run: mypy --python-version 3.11 --explicit-package-bases packages control-plane scripts tests
 
       - name: Phase-1 qualification
         run: python scripts/phase1_qualify_current.py
