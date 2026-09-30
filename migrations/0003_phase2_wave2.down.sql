@@ -1,0 +1,12 @@
+BEGIN;
+DROP TABLE IF EXISTS phase2_artifact_edges CASCADE;
+DROP TABLE IF EXISTS phase2_artifact_revisions CASCADE;
+DROP TABLE IF EXISTS phase2_artifact_objects CASCADE;
+DROP TABLE IF EXISTS phase2_tool_calls CASCADE;
+DROP TABLE IF EXISTS phase2_tool_registry CASCADE;
+DROP TABLE IF EXISTS phase2_worker_leases CASCADE;
+DROP TABLE IF EXISTS phase2_workers CASCADE;
+DROP TABLE IF EXISTS phase2_wave2_idempotency CASCADE;
+DROP TABLE IF EXISTS phase2_wave2_quotas CASCADE;
+DELETE FROM phase2_schema_migrations WHERE version=3;
+COMMIT;
