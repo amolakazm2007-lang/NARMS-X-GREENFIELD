@@ -43,6 +43,9 @@ jobs:
       - name: Install web dependencies
         working-directory: apps/web
         run: npm install
+      - name: Real Python 3.11 typecheck
+        run: mypy --python-version 3.11 packages control-plane scripts tests
+
       - name: Phase-1 qualification
         run: python scripts/phase1_qualify_current.py
       - name: Assert 32 of 32
