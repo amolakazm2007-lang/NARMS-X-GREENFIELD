@@ -1,0 +1,18 @@
+{
+  "scope": "phase2-opening-evidence-v1",
+  "status": "PASS",
+  "authority_key_id": "773235e774f6e31cdb412eee",
+  "certificate_fingerprint": "1d839f8880298f40d67dd4763d91df590ac4af6b8dc2ab508bf1402fbc9a35e3",
+  "qualification_root": "952f8d407b62edb0b52888756ec1941d3485736637501e313cef64a34e167a94",
+  "source_root": "5858abdcdbf90c64c7a83c33a406e000e9fcb72ac520e27f435b7ee9ab0ecfd9",
+  "closure_attestation_root": "12d6c062950848d25e2b9761e400e08fdf85a7dbf33ebe729547a503894dc7b1",
+  "trusted_public_key_hex": "ade776b39bdefae93a7e267f064e77dabba95a76f95b9265accb9f40d2d3acf4",
+  "opening_decision": {
+    "allowed": true,
+    "reasons": [],
+    "unlock_root": "37596dde39eeff9aa8464c3e7e3b3f10cf122c07f5821e9bf675474f5fcf049c",
+    "constitution_root": "5d8103a6c084a5257ae2d288b2952e28b6f2bf4373c296f353ec3b5fee702a8a",
+    "catalog_root": "be1a58053370915dc39380128caa054e744b5e419d3b59baf8dd3e999c561071"
+  },
+  "opening_decision_root": "f70b3e9c1c01601012a6a79b740b72b400ccba7998e9ba32e40be3e96520f414"
+}
