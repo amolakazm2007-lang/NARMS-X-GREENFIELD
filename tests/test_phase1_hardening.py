@@ -1,4 +1,5 @@
 import importlib.util, sys, unittest
+from typing import Any
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from packages.phase1_runtime import Store, PairingService
@@ -38,9 +39,13 @@ class EvidenceFreshnessTests(unittest.TestCase):
   self.assertFalse(verify_bound_gate_evidence(receipt,binding).fresh)
 
 class APISecurityRegression(unittest.TestCase):
+ mod: Any
+ client: Any
  @classmethod
  def setUpClass(cls):
-  p=ROOT/'control-plane/api/app.py'; spec=importlib.util.spec_from_file_location('narms_api_hardened',p); cls.mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(cls.mod)
+  p=ROOT/'control-plane/api/app.py'; spec=importlib.util.spec_from_file_location('narms_api_hardened',p)
+  assert spec is not None and spec.loader is not None
+  cls.mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(cls.mod)
   from fastapi.testclient import TestClient
   cls.client=TestClient(cls.mod.app)
  def test_attacker_cannot_pair_with_workspace_id_only(self):
