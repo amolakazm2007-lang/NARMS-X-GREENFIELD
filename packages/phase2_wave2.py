@@ -441,9 +441,10 @@ class PostgresWave2Runtime:
                     "INSERT INTO phase2_artifact_objects(content_sha256,size_bytes,media_type,storage_uri) VALUES(%s,%s,%s,%s) "
                     "ON CONFLICT(content_sha256) DO NOTHING", (content_sha, len(content), media_type, storage_uri)
                 )
+                cur.execute("SELECT pg_advisory_xact_lock(hashtextextended(%s,0))", (workspace_id + ":" + logical_artifact_id,))
                 rev = cur.execute(
                     "SELECT coalesce(max(revision),0)+1 AS n FROM phase2_artifact_revisions "
-                    "WHERE workspace_id=%s AND logical_artifact_id=%s FOR UPDATE",
+                    "WHERE workspace_id=%s AND logical_artifact_id=%s",
                     (workspace_id, logical_artifact_id),
                 ).fetchone()
                 revision = int(rev["n"]) if rev else 1
