@@ -324,15 +324,18 @@ class PostgresWave2Runtime:
                 return dict(row)
 
     def _approval(self, cur: psycopg.Cursor[Any], approval_id: str | None, workspace_id: str,
-                  tool_id: str, risk_class: str) -> None:
+                  mission_id: str, tool_id: str, risk_class: str, request_root: str) -> None:
         if risk_class not in SENSITIVE_RISKS:
             return
         if not approval_id:
             raise ApprovalRequired("approval required")
         row = cur.execute(
-            "SELECT workspace_id,state,action,risk FROM approvals WHERE id=%s", (approval_id,)
+            "SELECT a.workspace_id,a.state,a.action,a.risk,b.workspace_id,b.mission_id,b.tool_id,b.request_root,b.expires_at "
+            "FROM approvals a JOIN phase2_tool_approval_bindings b ON b.approval_id=a.id WHERE a.id=%s", (approval_id,)
         ).fetchone()
-        if not row or str(row[0]) != workspace_id or row[1] != "APPROVED" or row[2] != tool_id or row[3] != risk_class:
+        if (not row or str(row[0]) != workspace_id or row[1] != "APPROVED" or row[2] != tool_id or row[3] != risk_class
+                or str(row[4]) != workspace_id or str(row[5]) != mission_id or row[6] != tool_id
+                or row[7] != request_root or row[8] <= datetime.now(timezone.utc)):
             raise ApprovalRequired("approval receipt mismatch")
 
     def accept_tool_call(self, envelope: RequestEnvelope, *, lease_id: str, worker_id: str,
@@ -356,7 +359,8 @@ class PostgresWave2Runtime:
                     validate(instance=dict(envelope.payload), schema=tool["input_schema"])
                 except ValidationError as exc:
                     raise Wave2Error(f"tool input schema violation: {exc.message}") from exc
-                self._approval(cur, approval_id, envelope.workspace_id, tool_id, str(tool["risk_class"]))
+                self._approval(cur, approval_id, envelope.workspace_id, envelope.mission_id, tool_id,
+                               str(tool["risk_class"]), envelope.request_root)
                 prior = cur.execute(
                     "SELECT * FROM phase2_tool_calls WHERE workspace_id=%s AND mission_id=%s AND idempotency_key=%s",
                     (envelope.workspace_id, envelope.mission_id, envelope.idempotency_key),
