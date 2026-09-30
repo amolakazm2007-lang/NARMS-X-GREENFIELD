@@ -1,0 +1,9 @@
+{
+  "algorithm": "Ed25519",
+  "authority": "NARMS Release Authority v1",
+  "key_id": "773235e774f6e31cdb412eee",
+  "private_key_in_repository": false,
+  "public_key_hex": "ade776b39bdefae93a7e267f064e77dabba95a76f95b9265accb9f40d2d3acf4",
+  "scope": "phase1-qualification-and-phase2-opening",
+  "state": "ACTIVE"
+}
