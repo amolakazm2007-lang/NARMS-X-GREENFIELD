@@ -1,0 +1,12 @@
+{
+  "authority_key_id": "773235e774f6e31cdb412eee",
+  "certificate_fingerprint": "a7282c4d02a5f0cdea55dcdd0b409231fd830908602f105bbb16e5f253508031",
+  "closure_attestation_root": "00d387471dca7ee1790ad249486a39fb445bf77e1a38ad636caba6ef858a13c8",
+  "private_key_in_repository": false,
+  "qualification_passed": 32,
+  "qualification_root": "0f8d8231ab3ef8231d08fc2bde82a96c7f744413eb8bb89ba1eb0ff9156731a0",
+  "qualification_total": 32,
+  "signature_verified": true,
+  "source_root": "57e341caef67dc8824c38f5b22b8124cc4bfa97b0c8bde24047596ac0298f607",
+  "status": "PASS"
+}
