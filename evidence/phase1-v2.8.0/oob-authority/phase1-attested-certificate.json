@@ -1,14 +1,14 @@
 {
   "authority_key_id": "773235e774f6e31cdb412eee",
   "body": {
-    "closure_attestation_root": "00d387471dca7ee1790ad249486a39fb445bf77e1a38ad636caba6ef858a13c8",
+    "closure_attestation_root": "12d6c062950848d25e2b9761e400e08fdf85a7dbf33ebe729547a503894dc7b1",
     "phase": "PHASE_1",
-    "qualification_root": "0f8d8231ab3ef8231d08fc2bde82a96c7f744413eb8bb89ba1eb0ff9156731a0",
+    "qualification_root": "952f8d407b62edb0b52888756ec1941d3485736637501e313cef64a34e167a94",
     "scope": "phase1-attested-complete-phase2-may-open-v1",
-    "source_root": "57e341caef67dc8824c38f5b22b8124cc4bfa97b0c8bde24047596ac0298f607",
+    "source_root": "5858abdcdbf90c64c7a83c33a406e000e9fcb72ac520e27f435b7ee9ab0ecfd9",
     "version": "2.8.0"
   },
-  "fingerprint": "a7282c4d02a5f0cdea55dcdd0b409231fd830908602f105bbb16e5f253508031",
+  "fingerprint": "1d839f8880298f40d67dd4763d91df590ac4af6b8dc2ab508bf1402fbc9a35e3",
   "public_key": "ade776b39bdefae93a7e267f064e77dabba95a76f95b9265accb9f40d2d3acf4",
-  "signature": "7df996396f7e36d0401fd226c1382e74d7d9c6b1d4e85e244d210e726d60aaa25cbe7da4436d0989f45fb1f9fa565b3e8d0b9b6283538b96fb94bc7c0ac7de09"
+  "signature": "16392ab3008962d9ebd0f79e37a8ee30aefe0771da477ac3da4a0969f791ca745d356fac6b705bc2932d13d11b1c190cec43f41ec220e5085e56849226259c04"
 }
