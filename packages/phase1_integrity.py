@@ -45,8 +45,9 @@ class SourceSnapshot:
 
 def build_source_snapshot(root: Path) -> SourceSnapshot:
     entries = tuple((p.relative_to(root).as_posix(), p.stat().st_size, _file_sha256(p)) for p in iter_source_files(root))
-    body = {'algorithm': 'sha256-path-size-content-v1', 'files': entries}
-    return SourceSnapshot(body['algorithm'], entries, sha256_obj(body))
+    algorithm = 'sha256-path-size-content-v1'
+    body: dict[str, Any] = {'algorithm': algorithm, 'files': entries}
+    return SourceSnapshot(algorithm, entries, sha256_obj(body))
 
 
 def verify_source_snapshot(root: Path, snapshot: SourceSnapshot) -> dict[str, Any]:

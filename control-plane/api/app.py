@@ -46,10 +46,12 @@ def enroll(x:EnrollIn):
  except RuntimeError as e:raise HTTPException(400,str(e))
 @app.post('/api/v1/auth/session/rotate')
 def rotate_session(authorization:str|None=Header(None)):
+ if authorization is None: raise HTTPException(401,'missing bearer session')
  auth(authorization)
  return {'token':pairing.rotate_session(authorization[7:])}
 @app.post('/api/v1/auth/session/revoke')
 def revoke_session(authorization:str|None=Header(None)):
+ if authorization is None: raise HTTPException(401,'missing bearer session')
  auth(authorization); pairing.revoke_session(authorization[7:]); return {'revoked':True}
 @app.post('/api/v1/auth/bootstrap/rotate')
 def rotate_bootstrap(x:PairIn,authorization:str|None=Header(None)):

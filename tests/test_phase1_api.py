@@ -1,7 +1,10 @@
 import importlib.util,sys,unittest
 from pathlib import Path
 from fastapi.testclient import TestClient
-P=Path(__file__).resolve().parents[1]/'control-plane/api/app.py';spec=importlib.util.spec_from_file_location('narms_api',P);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);c=TestClient(m.app)
+P=Path(__file__).resolve().parents[1]/'control-plane/api/app.py'
+spec=importlib.util.spec_from_file_location('narms_api',P)
+assert spec is not None and spec.loader is not None
+m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);c=TestClient(m.app)
 class API(unittest.TestCase):
  def test_e2e_control_spine(self):
   wr=c.post('/api/v1/workspaces',json={'name':'اختبار'}).json();w=wr['id'];code=c.post('/api/v1/auth/pairing',json={'workspace_id':w,'bootstrap_secret':wr['bootstrap_secret']}).json()['code'];tok=c.post('/api/v1/auth/enroll',json={'code':code}).json()['token'];h={'Authorization':'Bearer '+tok}

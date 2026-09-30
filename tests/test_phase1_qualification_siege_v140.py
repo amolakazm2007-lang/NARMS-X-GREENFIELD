@@ -1,4 +1,5 @@
 import tempfile, threading, time, sys
+from typing import Any
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]; sys.path.insert(0,str(ROOT))
 import pytest
@@ -49,7 +50,7 @@ def test_outbox_retry_then_ack_is_idempotent():
 
 def test_sse_waits_for_new_event_then_returns_monotonic_cursor(monkeypatch):
     import importlib
-    appmod=importlib.import_module('control-plane.api.app'); appmod.store=Store(); appmod.pairing=PairingService(appmod.store)
+    appmod: Any=importlib.import_module('control-plane.api.app'); appmod.store=Store(); appmod.pairing=PairingService(appmod.store)
     w=appmod.store.workspace('w'); b=appmod.pairing.provision_workspace(w); token=appmod.pairing.enroll(appmod.pairing.issue(w,b)); cursor=appmod.store.events_after()[-1]['seq']
     def later(): time.sleep(.12); appmod.store.project(w,'arrived')
     t=threading.Thread(target=later); t.start(); r=TestClient(appmod.app).get('/api/v1/events',headers={'Authorization':'Bearer '+token,'Last-Event-ID':str(cursor)}); t.join()
@@ -77,7 +78,10 @@ def test_bootstrap_rotation_race_one_winner_and_invalidates_old_codes():
         try: q.rotate_bootstrap(w,bootstrap); ok=True
         except Exception: ok=False
         with lock: out.append(ok)
-    ts=[threading.Thread(target=rotate) for _ in range(8)]; [t.start() for t in ts]; barrier.wait(); [t.join() for t in ts]
+    ts=[threading.Thread(target=rotate) for _ in range(8)]
+    for t in ts: t.start()
+    barrier.wait()
+    for t in ts: t.join()
     assert sum(out)==1
     with pytest.raises(RuntimeError): q.enroll(code)
     assert s.db.execute('select generation from workspace_bootstrap where workspace_id=?',(w,)).fetchone()[0]==2

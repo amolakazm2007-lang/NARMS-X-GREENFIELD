@@ -24,14 +24,16 @@ class CampaignResult:
 def concurrent_campaign(name: str, workers: int, action: Callable[[int], bool]) -> CampaignResult:
     """Launch workers at one barrier and bind the observed result to an evidence root."""
     if workers < 2: raise ValueError('workers must be >= 2')
-    barrier=threading.Barrier(workers+1); outcomes=[]; lock=threading.Lock()
+    barrier=threading.Barrier(workers+1); outcomes: list[bool]=[]; lock=threading.Lock()
     def run(i: int):
         barrier.wait()
         try: ok=bool(action(i))
         except Exception: ok=False
         with lock: outcomes.append(ok)
     ts=[threading.Thread(target=run,args=(i,),daemon=True) for i in range(workers)]
-    [t.start() for t in ts]; barrier.wait(); [t.join(timeout=10) for t in ts]
+    for t in ts: t.start()
+    barrier.wait()
+    for t in ts: t.join(timeout=10)
     if any(t.is_alive() for t in ts): raise RuntimeError('stress worker did not terminate')
     successes=sum(outcomes); failures=len(outcomes)-successes
     body={'name':name,'attempts':workers,'successes':successes,'failures':failures,'outcomes':outcomes}

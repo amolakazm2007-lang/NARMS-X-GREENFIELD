@@ -138,7 +138,7 @@ class Store:
  def health(self):
   self.db.execute('SELECT 1').fetchone(); return {'status':'PASS','database':'PASS','realtime':'PASS','reference_worker':'PASS'}
  def audit_valid(self):
-  prev_by_workspace={}
+  prev_by_workspace: dict[str, str]={}
   for r in self.db.execute('SELECT * FROM audit_events ORDER BY seq'):
    prev=prev_by_workspace.get(r['workspace_id'],'GENESIS')
    body={'workspace_id':r['workspace_id'],'actor':r['actor'],'action':r['action'],'trace_id':r['trace_id'],'payload':json.loads(r['payload']),'prev_hash':prev}
@@ -219,5 +219,5 @@ def _recover_expired_jobs(self: Store, ts: float | None = None) -> list[str]:
    if c.execute('SELECT changes()').fetchone()[0]: recovered.append(r['id'])
  return recovered
 
-Store.heartbeat_job = _heartbeat_job
-Store.recover_expired_jobs = _recover_expired_jobs
+Store.heartbeat_job = _heartbeat_job  # type: ignore[attr-defined]
+Store.recover_expired_jobs = _recover_expired_jobs  # type: ignore[attr-defined]

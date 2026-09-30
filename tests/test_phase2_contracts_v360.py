@@ -1,4 +1,5 @@
 import json
+from typing import Any
 from pathlib import Path
 from packages.phase2_constitution import Phase2Constitution,validate_transition,constitution_report
 from packages.phase2_protocols import WorkerEnvelope,ToolEnvelope
@@ -38,6 +39,6 @@ def test_recovery_is_idempotency_aware():
  assert decide(attempt=1,max_attempts=3,lease_expired=True,checkpoint_present=True,idempotent=True,side_effect_committed=True).action=='RECONCILE'
 
 def test_phase2_opening_cannot_be_self_authorized():
- catalog=json.loads((ROOT/'docs/phase2/capability-catalog.json').read_text()); report={'gates':{},'blockers':{}}
+ catalog=json.loads((ROOT/'docs/phase2/capability-catalog.json').read_text()); report: dict[str, Any]={'gates':{},'blockers':{}}
  d=evaluate(certificate=None,report=report,attestation=None,trusted_public_key_hex=None,catalog=catalog)
  assert not d.allowed; assert 'phase1_trusted_certificate_missing' in d.reasons
