@@ -37,9 +37,10 @@ def test_session_rotation_race_only_one_successor():
         try: out=('ok',q.rotate_session(token))
         except Exception as e: out=('err',type(e).__name__)
         with lock: results.append(out)
-    ts=[threading.Thread(target=rotate) for _ in range(2)]; for t in ts: t.start()
-        barrier.wait()
-        for t in ts: t.join()
+    ts=[threading.Thread(target=rotate) for _ in range(2)]
+    for t in ts: t.start()
+    barrier.wait()
+    for t in ts: t.join()
     assert sum(r[0]=='ok' for r in results)==1
     active=s.db.execute('select count(*) from device_sessions where workspace_id=? and revoked_at is null',(w,)).fetchone()[0]; assert active==1
 
@@ -50,9 +51,10 @@ def test_pairing_code_enroll_race_is_single_use():
         try: out=('ok',q.enroll(code))
         except Exception as e: out=('err',type(e).__name__)
         with lock: results.append(out)
-    ts=[threading.Thread(target=enroll) for _ in range(2)]; for t in ts: t.start()
-        barrier.wait()
-        for t in ts: t.join()
+    ts=[threading.Thread(target=enroll) for _ in range(2)]
+    for t in ts: t.start()
+    barrier.wait()
+    for t in ts: t.join()
     assert sum(r[0]=='ok' for r in results)==1
     assert s.db.execute('select count(*) from device_sessions where workspace_id=?',(w,)).fetchone()[0]==1
 
