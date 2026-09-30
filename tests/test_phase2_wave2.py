@@ -71,6 +71,7 @@ def test_tool_typed_idempotency_and_sensitive_approval():
     approval=str(uuid4())
     with psycopg.connect(r.dsn) as conn:
         conn.execute("INSERT INTO approvals(id,workspace_id,state,actor,action,risk) VALUES(%s,%s,'APPROVED','operator','danger.exec','privileged')",(approval,w))
+        conn.execute("INSERT INTO phase2_tool_approval_bindings(approval_id,workspace_id,mission_id,tool_id,request_root,expires_at) VALUES(%s,%s,%s,'danger.exec',%s,now()+interval '5 minutes')",(approval,w,m,env2.request_root))
     accepted=r.accept_tool_call(env2,lease_id=str(lease["lease_id"]),worker_id=str(worker["worker_id"]),fencing_token=int(lease["fencing_token"]),tool_id="danger.exec",approval_id=approval)
     assert accepted["state"] == "ACCEPTED"
 
