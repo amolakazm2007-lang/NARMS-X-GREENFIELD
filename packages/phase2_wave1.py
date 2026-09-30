@@ -8,12 +8,16 @@ from typing import Any, Mapping
 from uuid import uuid4
 
 import psycopg
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 from psycopg.rows import dict_row
 
 from packages.phase2_constitution import validate_transition
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OPENING = ROOT / "evidence/phase2-opening-v1/opening-decision.json"
+DEFAULT_TRUST_ANCHOR = ROOT / "evidence/phase1-v2.8.0/oob-authority/public-trust-anchor.json"
+DEFAULT_CERTIFICATE = ROOT / "evidence/phase1-v2.8.0/oob-authority/phase1-attested-certificate.json"
+DEFAULT_AUTHORITY_VERIFICATION = ROOT / "evidence/phase1-v2.8.0/oob-authority/authority-verification.json"
 DEFAULT_MANIFEST = ROOT / "contracts/phase2-wave1.runtime.json"
 UP_MIGRATION = ROOT / "migrations/0002_phase2_wave1.sql"
 DOWN_MIGRATION = ROOT / "migrations/0002_phase2_wave1.down.sql"
@@ -73,11 +77,21 @@ class OpeningReceipt:
     certificate_fingerprint: str
 
 
-def load_opening(path: Path = DEFAULT_OPENING) -> OpeningReceipt:
+def load_opening(
+    path: Path = DEFAULT_OPENING,
+    *,
+    trust_anchor_path: Path = DEFAULT_TRUST_ANCHOR,
+    certificate_path: Path = DEFAULT_CERTIFICATE,
+    authority_verification_path: Path = DEFAULT_AUTHORITY_VERIFICATION,
+) -> OpeningReceipt:
     try:
         payload = json.loads(path.read_text())
+        trust = json.loads(trust_anchor_path.read_text())
+        certificate = json.loads(certificate_path.read_text())
+        authority = json.loads(authority_verification_path.read_text())
     except Exception as exc:
-        raise OpeningDenied(f"opening evidence unavailable: {exc}") from exc
+        raise OpeningDenied(f"opening trust material unavailable: {exc}") from exc
+
     decision = payload.get("opening_decision")
     reasons: list[str] = []
     if payload.get("scope") != "phase2-opening-evidence-v1":
@@ -88,6 +102,38 @@ def load_opening(path: Path = DEFAULT_OPENING) -> OpeningReceipt:
         reasons.append("opening_not_allowed")
     if isinstance(decision, dict) and decision.get("reasons"):
         reasons.append("opening_has_reasons")
+
+    if trust.get("algorithm") != "Ed25519" or trust.get("state") != "ACTIVE":
+        reasons.append("trust_anchor_invalid")
+    if trust.get("private_key_in_repository") is not False:
+        reasons.append("trust_anchor_private_key_policy_invalid")
+    public_key_hex = trust.get("public_key_hex")
+    if not _hex64(public_key_hex):
+        reasons.append("trust_anchor_public_key_invalid")
+
+    body = certificate.get("body")
+    if not isinstance(body, dict):
+        reasons.append("certificate_body_invalid")
+        body = {}
+    if certificate.get("public_key") != public_key_hex:
+        reasons.append("certificate_public_key_not_trusted")
+    if body.get("scope") != "phase1-attested-complete-phase2-may-open-v1":
+        reasons.append("certificate_scope_invalid")
+
+    raw = canonical(body)
+    fingerprint = hashlib.sha256(raw).hexdigest()
+    if certificate.get("fingerprint") != fingerprint:
+        reasons.append("certificate_fingerprint_mismatch")
+    try:
+        if not isinstance(public_key_hex, str):
+            raise ValueError("public key missing")
+        Ed25519PublicKey.from_public_bytes(bytes.fromhex(public_key_hex)).verify(
+            bytes.fromhex(str(certificate.get("signature", ""))),
+            raw,
+        )
+    except Exception:
+        reasons.append("certificate_signature_invalid")
+
     fields = {
         "opening_decision_root": payload.get("opening_decision_root"),
         "unlock_root": decision.get("unlock_root") if isinstance(decision, dict) else None,
@@ -99,6 +145,38 @@ def load_opening(path: Path = DEFAULT_OPENING) -> OpeningReceipt:
     for name, value in fields.items():
         if not _hex64(value):
             reasons.append(f"{name}_invalid")
+
+    if body.get("qualification_root") != fields["qualification_root"]:
+        reasons.append("certificate_qualification_root_mismatch")
+    if body.get("source_root") != fields["source_root"]:
+        reasons.append("certificate_source_root_mismatch")
+    if body.get("closure_attestation_root") != fields["closure_attestation_root"]:
+        reasons.append("certificate_attestation_root_mismatch")
+    if fingerprint != fields["certificate_fingerprint"]:
+        reasons.append("opening_certificate_fingerprint_mismatch")
+
+    if (
+        authority.get("status") != "PASS"
+        or authority.get("signature_verified") is not True
+        or authority.get("authority_key_id") != trust.get("key_id")
+        or authority.get("certificate_fingerprint") != fingerprint
+        or authority.get("qualification_root") != fields["qualification_root"]
+        or authority.get("source_root") != fields["source_root"]
+        or authority.get("closure_attestation_root") != fields["closure_attestation_root"]
+    ):
+        reasons.append("authority_verification_mismatch")
+
+    verification_result = {
+        "phase2_allowed": True,
+        "reasons": [],
+        "certificate_fingerprint": fingerprint,
+        "qualification_root": fields["qualification_root"],
+        "source_root": fields["source_root"],
+        "closure_attestation_root": fields["closure_attestation_root"],
+    }
+    if root(verification_result) != fields["unlock_root"]:
+        reasons.append("unlock_root_mismatch")
+
     if isinstance(decision, dict):
         calculated = root(
             {
@@ -111,6 +189,7 @@ def load_opening(path: Path = DEFAULT_OPENING) -> OpeningReceipt:
         )
         if calculated != payload.get("opening_decision_root"):
             reasons.append("opening_decision_root_mismatch")
+
     if reasons:
         raise OpeningDenied(",".join(sorted(set(reasons))))
     return OpeningReceipt(**fields)
