@@ -2,7 +2,7 @@ BEGIN;
 DROP TABLE IF EXISTS phase2_artifact_edges CASCADE;
 DROP TABLE IF EXISTS phase2_artifact_revisions CASCADE;
 DROP TABLE IF EXISTS phase2_artifact_objects CASCADE;
-DROP TABLE IF EXISTS phase2_tool_calls CASCADE;
+DROP TABLE IF EXISTS phase2_tool_calls CASCADE;\nDROP TABLE IF EXISTS phase2_tool_approval_bindings CASCADE;
 DROP TABLE IF EXISTS phase2_tool_registry CASCADE;
 DROP TABLE IF EXISTS phase2_worker_leases CASCADE;
 DROP TABLE IF EXISTS phase2_workers CASCADE;
