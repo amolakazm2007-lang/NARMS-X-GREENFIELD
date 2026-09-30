@@ -1,0 +1,63 @@
+{
+  "scope": "phase2-wave1-runtime-manifest-v1",
+  "version": "1.0.0",
+  "wave": 1,
+  "opening_decision_root": "f70b3e9c1c01601012a6a79b740b72b400ccba7998e9ba32e40be3e96520f414",
+  "implementation": "packages.phase2_wave1.PostgresWave1Runtime",
+  "migration_up": "migrations/0002_phase2_wave1.sql",
+  "migration_down": "migrations/0002_phase2_wave1.down.sql",
+  "capabilities": [
+    {
+      "capability_id": "mission.workspace",
+      "owner": "mission-os",
+      "wave": 1,
+      "depends_on": [],
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "runtime_kind": "control-plane",
+      "risk_class": "low",
+      "resource_class": "control",
+      "implementation_version": "1.0.0"
+    },
+    {
+      "capability_id": "capability.registry",
+      "owner": "mission-os",
+      "wave": 1,
+      "depends_on": [
+        "mission.workspace"
+      ],
+      "boundaries": [
+        "identity",
+        "policy",
+        "approvals",
+        "durable_jobs",
+        "leases_fencing",
+        "events",
+        "evidence",
+        "artifacts",
+        "audit",
+        "observability",
+        "quotas_compute"
+      ],
+      "runtime_kind": "control-plane",
+      "risk_class": "low",
+      "resource_class": "control",
+      "implementation_version": "1.0.0"
+    }
+  ],
+  "fail_closed": true,
+  "optimistic_concurrency": true,
+  "postgres_authoritative": true,
+  "rollback_required": true
+}
