@@ -1,7 +1,7 @@
 {
   "version": "4.3.0",
-  "milestone": "PHASE_2_WAVE_1",
-  "status": "PASS",
+  "milestone": "PHASE_2_WAVE_2_CANDIDATE",
+  "status": "PENDING_REAL_CI",
   "main_baseline_merge_commit": "33cd029fa2fd807a4062782d37d46eb05122b0d0",
   "phase1": {
     "closure": "PASS",
@@ -22,24 +22,30 @@
     "wave1_real_migration": true,
     "wave1_real_rollback": true,
     "wave1_final_reapply": true,
-    "wave2_started": false
+    "wave2_started": true,
+    "wave2": "IMPLEMENTED_PENDING_CI",
+    "wave2_capabilities": [
+      "worker.protocol",
+      "tool.protocol",
+      "artifact.graph"
+    ]
   },
   "ci": {
     "phase1_closure_workflow": "PASS",
-    "phase2_wave1_workflow": "PASS"
+    "phase2_wave1_workflow": "PASS",
+    "phase2_wave2_workflow": "PENDING"
   },
   "trust_boundary": {
     "repository_private_key_present": false,
     "note": "The repository pins a release trust anchor and signed opening evidence. Before production promotion, move signing authority to an independently controlled secret/KMS/HSM workflow and preserve key-rotation/revocation procedures."
   },
   "next_wave": {
-    "wave": 2,
+    "wave": 3,
     "capabilities": [
-      "worker.protocol",
-      "tool.protocol",
-      "artifact.graph"
+      "code.repository",
+      "build.test"
     ],
-    "rule": "Do not start Wave 3 or GPU/model/browser runtimes until Wave 2 is implemented, tested, rollback-qualified, and merged with green CI."
+    "rule": "Do not start Wave 3 until Wave 2 is merged with all required checks green."
   },
-  "truth_boundary": "Only Phase-2 Wave 1 is executable today. Contract/design files for later waves are not proof that those runtimes exist."
+  "truth_boundary": "Wave 2 code is implemented on a feature branch but is not PASS or merged until real PostgreSQL 16 CI, concurrency/adversarial tests, rollback/final-reapply, Phase-1 closure and Wave-1 regression are green. No Wave 3+ runtime is implemented."
 }

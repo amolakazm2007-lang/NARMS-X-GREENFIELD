@@ -1,0 +1,18 @@
+{
+  "scope":"phase2-wave2-runtime-manifest-v1",
+  "version":"1.0.0",
+  "wave":2,
+  "depends_on":["mission.workspace","capability.registry"],
+  "capabilities":["worker.protocol","tool.protocol","artifact.graph"],
+  "postgres_authoritative":true,
+  "typed_envelopes":true,
+  "leases_fencing":true,
+  "approval_gated_risks":["external_side_effect","privileged"],
+  "artifact_content_addressed":true,
+  "artifact_revisions_immutable":true,
+  "lineage_dag":true,
+  "audit_outbox_required":true,
+  "fail_closed":true,
+  "rollback_required":true,
+  "production_evidence_must_be_real":true
+}

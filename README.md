@@ -1,3 +1,11 @@
+# NARMS X GREENFIELD — Phase 2 / Wave 2 Candidate
+
+Wave 2 is implemented on the `phase2-wave2-runtime` feature branch for `worker.protocol`, `tool.protocol`, and `artifact.graph`. It is not considered merged or production-qualified until the PR's real PostgreSQL 16 CI, Phase-1 closure, Wave-1 regression, Wave-2 qualification, rollback and final reapply are green. Wave 3+ remains unopened.
+
+See `docs/PHASE2_WAVE2_RUNTIME.md`.
+
+---
+
 # NARMS X GREENFIELD — Current Verified State
 
 **Current milestone:** Phase 2 / Wave 1 is merged to `main` and both required GitHub Actions workflows pass on the merge.
