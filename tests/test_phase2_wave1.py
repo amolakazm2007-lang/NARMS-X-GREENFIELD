@@ -9,6 +9,9 @@ import psycopg
 import pytest
 
 from packages.phase2_wave1 import (
+    DEFAULT_AUTHORITY_VERIFICATION,
+    DEFAULT_CERTIFICATE,
+    DEFAULT_TRUST_ANCHOR,
     ConcurrencyConflict,
     DependencyBlocked,
     OpeningDenied,
@@ -20,7 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DSN = os.getenv("NARMS_PHASE2_POSTGRES_DSN") or os.getenv("NARMS_PHASE1_POSTGRES_DSN")
 
 
-pytestmark = pytest.mark.skipif(not DSN, reason="real PostgreSQL DSN required")
+pytestmark = pytest.mark.skipif(not DSN or os.getenv("NARMS_PHASE2_TESTS") != "1", reason="real Phase-2 PostgreSQL test environment required")
 
 
 def runtime() -> PostgresWave1Runtime:
@@ -61,6 +64,20 @@ def test_opening_fails_closed_on_tamper(tmp_path: Path):
     with pytest.raises(OpeningDenied):
         load_opening(p)
 
+
+
+
+def test_opening_rejects_tampered_certificate(tmp_path: Path):
+    cert = json.loads(DEFAULT_CERTIFICATE.read_text())
+    cert["body"]["source_root"] = "0" * 64
+    cert_path = tmp_path / "certificate.json"
+    cert_path.write_text(json.dumps(cert))
+    with pytest.raises(OpeningDenied):
+        load_opening(
+            certificate_path=cert_path,
+            trust_anchor_path=DEFAULT_TRUST_ANCHOR,
+            authority_verification_path=DEFAULT_AUTHORITY_VERIFICATION,
+        )
 
 def test_wave1_runtime_mission_workspace_and_history():
     r = runtime()
